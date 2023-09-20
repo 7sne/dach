@@ -19,14 +19,13 @@
     ],
     "scripts": {
         "build": "pnpm unbuild",
-        "prepack": "pnpm unbuild",
         "release": "vitest run && changelogen --release && git push --follow-tags && npm publish",
         "stub": "pnpm unbuild --stub",
         "lint": "eslint --ext .ts,.js . && prettier src/**/*.ts test/**/*.ts",
         "lint:fix": "eslint --fix --ext .ts,.js . && prettier --write src/**/*.ts test/**/*.ts",
-        "test": "pnpm lint && vitest run --coverage",
+        "test": "vitest run --coverage",
         "dev": "cross-env esno src/cli.ts",
-        "typecheck": "tsc --noEmit"
+        "typecheck": "tsc -p tsconfig.json --noEmit"
     },
     "dependencies": {
         "canvas": "^2.11.2",
@@ -40,11 +39,13 @@
         "@types/pixelmatch": "^5.2.4",
         "@types/pngjs": "^6.0.1",
         "@types/yoga-layout": "^1.9.4",
+        "@vitest/coverage-v8": "^0.34.4",
         "cross-env": "^7.0.3",
         "eslint": "^8.43.0",
         "execa": "^8.0.1",
         "pixelmatch": "^5.3.0",
         "pngjs": "^7.0.0",
+        "prettier": "^3.0.3",
         "typescript": "^5.1.5",
         "unbuild": "^1.2.1",
         "unconfig": "^0.3.9",
