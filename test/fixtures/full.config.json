@@ -1,0 +1,58 @@
+{
+  "title": {
+    "text": "Dach",
+    "fontFamily": "Sora",
+    "fontPath": "./assets/sora.otf",
+    "fontSize": 248
+  },
+  "description": {
+    "text": "Elegant banners from terminal",
+    "fontFamily": "Satoshi",
+    "fontPath": "./assets/satoshi.otf",
+    "fontSize": 96
+  },
+  "dimensions": [
+    3200,
+    1600
+  ],
+  "background": {
+    "type": "gradient",
+    "colors": [
+      "#fbe37d",
+      "#336f55",
+      "#fff5c5",
+      "#7fa381"
+    ],
+    "positions": [
+      {
+        "x": 0.2,
+        "y": 0.1
+      },
+      {
+        "x": 0.6,
+        "y": 0.2
+      },
+      {
+        "x": 0,
+        "y": 0
+      },
+      {
+        "x": 0,
+        "y": 0
+      },
+      {
+        "x": 0,
+        "y": 0
+      },
+      {
+        "x": 0,
+        "y": 0
+      },
+      {
+        "x": 0,
+        "y": 0
+      }
+    ]
+  },
+  "roundedCorners": true
+}

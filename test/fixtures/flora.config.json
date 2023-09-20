@@ -1,0 +1,44 @@
+{
+  "title": {
+    "text": "Flora",
+    "color": "#080808"
+  },
+  "description": {
+    "text": "Bloom where you are planted",
+    "color": "#080808"
+  },
+  "background": {
+    "type": "gradient",
+    "colorsPreset": "flora",
+    "positions": [
+      {
+        "x": 0.5,
+        "y": 0.5
+      },
+      {
+        "x": 0,
+        "y": 0
+      },
+      {
+        "x": 1,
+        "y": 1
+      },
+      {
+        "x": 0.5,
+        "y": 0.5
+      },
+      {
+        "x": 1,
+        "y": 1
+      },
+      {
+        "x": 0.1,
+        "y": 0.1
+      },
+      {
+        "x": 1,
+        "y": 1
+      }
+    ]
+  }
+}
