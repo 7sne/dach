@@ -21,69 +21,39 @@ program
         'Path to config file',
         `${process.cwd()}/assets/dach.config.json`,
     )
-
     .option('-o, --output <path>',
         'Output directory, defaults to `cwd/assets`',
         `${process.cwd()}/assets`,
     )
-
     .option('-t, --title <text>', 'Project title')
-
-    .option('-tf, --title-font <path>',
-        'Path to title font, defaults to `cwd/assets/title-font.ttf`',
-        `${process.cwd()}/assets/title-font.ttf`,
-    )
-
     .option('-tc, --title-color <path>',
         'Color of title font, defaults to `#ffffff`',
         '#ffffff',
     )
-
     .option('-d, --description <text>', 'Project description')
-
-    .option('-df, --description-font <path>',
-        'Path to description font, defaults to `cwd/assets/description-font.ttf`',
-        `${process.cwd()}/assets/description-font.ttf`,
-    )
-
     .option('-df, --description-color <path>',
         'Color of description font, defaults to `#ffffff`',
         '#ffffff',
     )
-
     .option('-dim, --dimensions <width>x<height>',
         'Dimensions of the sandbox image, defaults to `4000x1600`',
         '4000x1600',
     )
-
-    .option('-o, --sandbox <path>',
-        'Path to sandbox file, defaults to `cwd/assets/minimal.png`, the file extension must be a `.png`',
-        `${process.cwd()}/assets/project-banner.png`,
+    .option('-b, --background-type <type>',
+        'Background type, defaults to `plain`',
+        'plain',
     )
-
-    .option('-gp, --gradient-positions <positions>',
-        'Gradient positions, defaults to `0,0,0,1`',
-        '0,0,0,1',
-    )
-
     .option('-gpp, --gradient-positions-preset <preset>',
         'Gradient positions preset, defaults to `none`',
         'none',
     )
-
-    .option('-gc, --gradient-colors <colors>',
-        'Gradient colors, defaults to `#000000, #ffffff`',
-        '#000000, #ffffff',
-    )
-
     .option('-gcp, --gradient-colors-preset <preset>',
         'Gradient colors preset, defaults to `none`',
         'none',
     )
-
-    .option('-b, --background-type <type>',
-        'Background type, defaults to `plain`',
-        'plain',
+    .option('-bc, --background-color <path>',
+        'Color of banner background',
+        '#171717',
     )
 
 async function run(): Promise<void> {
