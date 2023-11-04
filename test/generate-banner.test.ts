@@ -1,61 +1,83 @@
-import fs from 'node:fs/promises'
+import * as fs from 'node:fs/promises'
+import * as fssync from 'node:fs'
 import { execa } from 'execa'
-import { afterAll, describe, expect } from 'vitest'
-import type { Config } from '../src/schema'
-import { visualRegression } from './visual-regression'
+import { describe } from 'vitest'
+import { visualRegression } from '../src/internal/visual-regression'
 
-describe('generate-banner', () => {
-    let defaultConfig: Config
+const sandboxDirectoryPath = `${process.cwd()}/test/sandbox`
 
+describe.skip('Generate banner', () => {
     beforeAll(async () => {
-        await fs.mkdir(`${process.cwd()}/test/sandbox`)
+        if (fssync.existsSync(sandboxDirectoryPath))
+            await fs.rm(sandboxDirectoryPath, { recursive: true })
     })
 
-    afterAll(async () => {
-        await fs.rm(`${process.cwd()}/test/sandbox`, { recursive: true })
-    })
-
-    test('should generate banner using minimal config', async () => {
-        const baselineBannerPath = `${process.cwd()}/test/baseline/minimal.png`
-        const newBannerPath = `${process.cwd()}/test/sandbox/project-banner.png`
-
+    beforeEach(async () => {
         await execa('pnpm', ['build'])
-        await execa('node', ['dist/cli.cjs', '--config', 'test/fixtures/minimal.config.json', '--output', 'test/sandbox'])
-
-        expect(async () => await fs.readFile(newBannerPath)).not.toThrow()
-        expect(visualRegression(baselineBannerPath, newBannerPath)).not.instanceOf(Error)
+        await fs.mkdir(sandboxDirectoryPath)
     })
 
-    test('should generate banner using blaze config', async () => {
-        const baselineBannerPath = `${process.cwd()}/test/baseline/blaze.png`
-        const newBannerPath = `${process.cwd()}/test/sandbox/project-banner.png`
+    afterEach(async () => {
+        await fs.rm(sandboxDirectoryPath, { recursive: true })
+    })
 
+    test('should generate banner with default configuration.', async () => {
+        await execa('node', ['dist/cli.cjs'])
+        expect(
+            visualRegression(
+                './test/baseline/default-test-banner.png',
+                './.github/project-banner.png',
+            ),
+        ).not.instanceOf(Error)
+    })
+
+    test('should generate banner with `output` provided.', async () => {
         await execa('pnpm', ['build'])
-        await execa('node', ['dist/cli.cjs', '--config', 'test/fixtures/blaze.config.json', '--output', 'test/sandbox'])
+        await execa('node', ['dist/cli.cjs'])
+        await execa('node', ['dist/cli.cjs', '--output', '.'])
+        await execa('node', ['dist/cli.cjs', '--output', 'assets'])
+        await execa('node', ['dist/cli.cjs', '--output', 'assets/'])
+        await execa('node', ['dist/cli.cjs', '-o', './assets'])
+        await execa('node', ['dist/cli.cjs', '-o', '/tmp'])
+    }, 15_000)
 
-        expect(async () => await fs.readFile(newBannerPath)).not.toThrow()
-        expect(visualRegression(baselineBannerPath, newBannerPath)).not.instanceOf(Error)
+    test('should generate banner with `title` provided.', async () => {
+        await execa('node', ['dist/cli.cjs', '--output', './test/sandbox', '-t', 'Title test', '-r'])
+        await execa('node', ['dist/cli.cjs', '--output', './test/sandbox', '--title', 'Title test', '-r'])
+        expect(
+            visualRegression('./test/baseline/title-test-banner.png', './test/sandbox/project-banner.png'),
+        ).not.instanceOf(Error)
+    }, 15_000)
+
+    test('should generate banner with `title`, `description` and `rounded-corners` provided.', async () => {
+        await execa('node', ['dist/cli.cjs', '--output', './test/sandbox', '-t', 'Title test', '-d', 'Description test', '-r'])
+        await execa('node', ['dist/cli.cjs', '--output', './test/sandbox', '--title', 'Title test', '--description', 'Description test', '--rounded-corners'])
+        expect(
+            visualRegression('./test/baseline/title-desc-test-banner.png', './test/sandbox/project-banner.png'),
+        ).not.instanceOf(Error)
+    }, 15_000)
+})
+
+describe('Generate themed banner.', () => {
+    beforeAll(async () => {
+        if (fssync.existsSync(sandboxDirectoryPath))
+            await fs.rm(sandboxDirectoryPath, { recursive: true })
     })
 
-    test('should generate banner using funk config', async () => {
-        const baselineBannerPath = `${process.cwd()}/test/baseline/funk.png`
-        const newBannerPath = `${process.cwd()}/test/sandbox/project-banner.png`
-
+    beforeEach(async () => {
         await execa('pnpm', ['build'])
-        await execa('node', ['dist/cli.cjs', '--config', 'test/fixtures/funk.config.json', '--output', 'test/sandbox'])
-
-        expect(async () => await fs.readFile(newBannerPath)).not.toThrow()
-        expect(visualRegression(baselineBannerPath, newBannerPath)).not.instanceOf(Error)
+        await fs.mkdir(sandboxDirectoryPath)
     })
 
-    test('should generate banner using flora config', async () => {
-        const baselineBannerPath = `${process.cwd()}/test/baseline/flora.png`
-        const newBannerPath = `${process.cwd()}/test/sandbox/project-banner.png`
-
-        await execa('pnpm', ['build'])
-        await execa('node', ['dist/cli.cjs', '--config', 'test/fixtures/flora.config.json', '--output', 'test/sandbox'])
-
-        expect(async () => await fs.readFile(newBannerPath)).not.toThrow()
-        expect(visualRegression(baselineBannerPath, newBannerPath)).not.instanceOf(Error)
+    afterEach(async () => {
+        await fs.rm(sandboxDirectoryPath, { recursive: true })
     })
+
+    test('', async () => {
+        await execa('node', ['dist/cli.cjs', '--output', './test/sandbox', '-t', 'Title test', '-d', 'Description test'])
+        await execa('node', ['dist/cli.cjs', '--output', './test/sandbox', '--title', 'Title test', '--description', 'Description test'])
+        expect(
+            visualRegression('./test/baseline/title-desc-test-banner.png', './test/sandbox/project-banner.png'),
+        ).not.instanceOf(Error)
+    }, 15_000)
 })

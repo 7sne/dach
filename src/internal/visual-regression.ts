@@ -3,7 +3,11 @@ import process from 'node:process'
 import { PNG } from 'pngjs'
 import pixelmatch from 'pixelmatch'
 
-export function visualRegression(baselineImagePath: string, generatedImagePath: string): Error | undefined {
+export function visualRegression(
+    baselineImagePath: string,
+    generatedImagePath: string,
+    threshold = 0,
+): Error | undefined {
     const baseline = PNG.sync.read(fs.readFileSync(baselineImagePath))
     const generated = PNG.sync.read(fs.readFileSync(generatedImagePath))
 
@@ -17,6 +21,6 @@ export function visualRegression(baselineImagePath: string, generatedImagePath: 
     const diff = new PNG({ width, height })
     const numDiffPixels = pixelmatch(baseline.data, generated.data, diff.data, width, height, { threshold: 0.1 })
 
-    if (numDiffPixels > 0)
+    if (numDiffPixels > threshold)
         return new Error('Visual regression test failed. Differences found.')
 }

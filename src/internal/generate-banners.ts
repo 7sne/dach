@@ -6,8 +6,8 @@ import { writeCanvasToPngFile } from '../write-canvas-to-png'
 import { randomRgbPositions } from './rand-rgb-positions'
 
 /**
+ * @internal
  * @description Internal function to generate banners for testing purposes.
- * Eventually it will probably become a feature lol.
  */
 export function generateBanners(count = 100): void {
     for (let i = 0; i <= count; ++i) {

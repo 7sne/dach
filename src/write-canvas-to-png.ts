@@ -2,7 +2,11 @@ import path from 'node:path'
 import fs from 'node:fs'
 import type canvas from 'canvas'
 
-export function writeCanvasToPngFile(canvas: canvas.Canvas, bannerPath: string, filename: string): Error | void {
+export function writeCanvasToPngFile(
+    canvas: canvas.Canvas,
+    bannerPath: string,
+    filename: string,
+): Error | void {
     const filenameWithExt = `${filename}.png`
     try {
         const bannerFilePath = path.join(bannerPath, filenameWithExt)
