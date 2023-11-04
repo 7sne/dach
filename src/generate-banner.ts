@@ -1,10 +1,11 @@
+import * as process from 'node:process'
 import * as canvas from 'canvas'
 import * as Yoga from 'yoga-layout-prebuilt'
 
 import { hexCodesToRgb } from './rgb'
 import { gradientImageData } from './gradient-image-data'
-import type { Config, GradientBackgroundConfig, PlainBackgroundConfig } from './schema'
-import { colorPresetNameToColors } from './color-presets'
+import type { BackgroundConfig, BannerSettings, Theme } from './schema'
+import { colorPresetToColor } from './color-presets'
 import { positionPresetToPositions } from './position-presets'
 
 export type Position = {
@@ -14,49 +15,19 @@ export type Position = {
 
 export function generateBanner(
     {
+        theme,
         title,
         description,
         dimensions,
-        background,
         roundedCorners,
-    }: Omit<Config, 'output' | 'config' | 'bannerPath' | 'configPath'>,
+    }: BannerSettings,
 ): Error | canvas.Canvas {
     let coreCanvas = canvas.createCanvas(...dimensions)
     let coreCanvasContext = coreCanvas.getContext('2d')
 
-    if (background.type === 'gradient') {
-        let colors = background.colors
-        let positions = background.positions
+    const backgroundConfig = makeCanvasBackground(coreCanvas, coreCanvasContext, theme, dimensions)
 
-        if (background.colorsPreset)
-            colors = colorPresetNameToColors[background.colorsPreset!]
-
-        if (background.positionsPreset)
-            positions = positionPresetToPositions[background.positionsPreset!]
-
-        makeBackgroundGradient(
-            coreCanvas,
-            coreCanvasContext,
-            dimensions,
-            {
-                ...background,
-                colors: colors!,
-                positions: positions!,
-            },
-        )
-    }
-    if (background.type === 'plain') {
-        makeBackgroundPlainColor(
-            coreCanvasContext,
-            background,
-            dimensions,
-        )
-    }
-
-    const registerFontsError = registerFonts(
-        { path: title.fontPath, family: title.fontFamily },
-        { path: description.fontPath, family: description.fontFamily },
-    )
+    const registerFontsError = registerFonts()
 
     if (registerFontsError)
         return registerFontsError
@@ -80,24 +51,26 @@ export function generateBanner(
     const descriptionNode = Yoga.Node.create()
 
     // Create space between title and description.
-    titleNode.setPadding(Yoga.EDGE_BOTTOM, title.fontSize * 0.8)
+    titleNode.setPadding(Yoga.EDGE_BOTTOM, 296 * 0.8)
 
     // Arrange title and description in the center of the canvas.
     makeLayout(coreCanvas, { title: titleNode, description: descriptionNode })
 
     // Draw title and description.
-    coreCanvasContext.fillStyle = title.color
-    coreCanvasContext.font = `${title.fontSize}px ${title.fontFamily}, sans`
+    // @todo - Handle these things better!
+    coreCanvasContext.fillStyle = backgroundConfig.text.titleColor ?? '#ffffff'
+    coreCanvasContext.font = 'extrabold 296px Geist sans'
     coreCanvasContext.fillText(
-        title.text,
+        title,
         titleNode.getComputedLeft(),
         titleNode.getComputedTop(),
     )
 
-    coreCanvasContext.fillStyle = description.color
-    coreCanvasContext.font = `${description.fontSize}px ${description.fontFamily}, sans`
+    // @todo - Handle these things better!
+    coreCanvasContext.fillStyle = backgroundConfig.text.descriptionColor ?? '#ffffff'
+    coreCanvasContext.font = '112px Geist sans'
     coreCanvasContext.fillText(
-        description.text,
+        description,
         descriptionNode.getComputedLeft(),
         descriptionNode.getComputedTop(),
     )
@@ -105,19 +78,134 @@ export function generateBanner(
     return coreCanvas
 }
 
+/* eslint-disable @typescript-eslint/indent */
+function convertThemeToBackgroundConfig(theme: Theme): BackgroundConfig {
+    switch (theme) {
+    case 'blaze':
+        return {
+            type: 'gradient',
+            text: {
+                titleColor: '#f5f5f5',
+                descriptionColor: '#f5f5f5',
+            },
+            background: {
+                colorsPreset: 'blaze',
+                positionsPreset: 14,
+            },
+        }
+
+    case 'flora':
+        return {
+            type: 'gradient',
+            text: {
+                titleColor: '#050505',
+                descriptionColor: '#050505',
+            },
+            background: {
+                colorsPreset: 'flora',
+                positionsPreset: 2,
+            },
+        }
+    case 'funk':
+        return {
+            type: 'gradient',
+            text: {
+                titleColor: '#f5f5f5',
+                descriptionColor: '#f5f5f5',
+            },
+            background: {
+                colorsPreset: 'funk',
+                positionsPreset: 20,
+            },
+        }
+    case 'orange':
+        return {
+            type: 'gradient',
+            text: {
+                titleColor: '#050505',
+                descriptionColor: '#050505',
+            },
+            background: {
+                colorsPreset: 'orange',
+                positionsPreset: 4,
+            },
+        }
+    case 'elegant':
+        return {
+            type: 'plain',
+            text: {
+                titleColor: '#f5f5f5',
+                descriptionColor: '#f5f5f5',
+            },
+            background: {
+                color: '#080808',
+            },
+        }
+    default:
+        return {
+            type: 'plain',
+            text: {
+                titleColor: '#f5f5f5',
+                descriptionColor: '#f5f5f5',
+            },
+            background: {
+                color: '#080808',
+            },
+        }
+    }
+}
+
+function makeCanvasBackground(
+    coreCanvas: canvas.Canvas,
+    coreCanvasContext: canvas.CanvasRenderingContext2D,
+    theme: Theme,
+    dimensions: [number, number],
+): BackgroundConfig {
+    const { background, text, type } = convertThemeToBackgroundConfig(theme)
+
+    if (type === 'gradient') {
+        const colors = colorPresetToColor[background.colorsPreset]
+        const positions = positionPresetToPositions[background.positionsPreset]
+
+        makeBackgroundGradient(
+            coreCanvas,
+            coreCanvasContext,
+            dimensions,
+            {
+                ...background,
+                colors,
+                positions,
+            },
+        )
+    }
+
+    if (type === 'plain') {
+        makeBackgroundPlainColor(
+            coreCanvasContext,
+            dimensions,
+            background.color,
+        )
+    }
+
+    return { background, text, type } as BackgroundConfig
+}
+
 function makeBackgroundGradient(
     canvas: canvas.Canvas,
     context: canvas.CanvasRenderingContext2D,
     dimensions: [number, number],
-    gradientConfig: GradientBackgroundConfig,
+    gradientConfig: {
+        colors: string[]
+        positions: Position[]
+    },
 ): void {
-    const rgbGradientColors = hexCodesToRgb(gradientConfig.colors!)
-
+    const { positions, colors } = gradientConfig
+    const rgbGradientColors = hexCodesToRgb(colors)
     const imageData = gradientImageData(
         context,
         ...dimensions,
         rgbGradientColors,
-        gradientConfig.positions!,
+        positions,
     )
 
     context.putImageData(imageData, 0, 0)
@@ -126,20 +214,18 @@ function makeBackgroundGradient(
 
 function makeBackgroundPlainColor(
     context: canvas.CanvasRenderingContext2D,
-    backgroundConfig: PlainBackgroundConfig,
     dimensions: [number, number],
+    backgroundColor: string,
 ): void {
-    context.fillStyle = backgroundConfig.color
+    context.fillStyle = backgroundColor
     context.fillRect(0, 0, ...dimensions)
 }
 
-function registerFonts(
-    titleFont: { family: string; path: string },
-    descriptionFont: { family: string; path: string },
-): Error | void {
+function registerFonts(): Error | void {
     try {
-        canvas.registerFont(titleFont.path, { family: titleFont.family })
-        canvas.registerFont(descriptionFont.path, { family: descriptionFont.family })
+        const geistFontPath = `${process.cwd()}/assets/Geist.ttf`
+        canvas.registerFont(geistFontPath, { family: 'Geist' })
+        canvas.registerFont(geistFontPath, { family: 'Geist' })
     } catch (e) {
         return e as Error
     }

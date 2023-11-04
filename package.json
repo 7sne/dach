@@ -6,7 +6,7 @@
     "license": "MIT",
     "main": "./dist/cli.cjs",
     "bin": {
-        "dach": "./dist/cli.cjs"
+        "dach": "dist/cli.cjs"
     },
     "exports": {
         ".": {
