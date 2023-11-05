@@ -58,34 +58,22 @@ dach
         <th>Default</th>
     </tr>
     <tr>
-        <td><code>--config</code></td>
-        <td><code>-c</code></td>
-        <td>Path to config file.</td>
-        <td><code>[cwd]/assets/dach.config.json</code></td>
-    </tr>
-    <tr>
         <td><code>--output</code></td>
         <td><code>-o</code></td>
         <td>Output directory</td>
-        <td><code>[cwd]/assets</code></td>
+        <td><code>[cwd]/.github</code></td>
     </tr>
     <tr>
         <td><code>--title</code></td>
         <td><code>-t</code></td>
         <td>The title of your project.</td>
-        <td><code>-</code></td>
-    </tr>
-    <tr>
-        <td><code>--title-color</code></td>
-        <td><code>-tc</code></td>
-        <td>Color of title text</td>
-        <td><code>#FFFFFF</code></td>
+        <td><code>Untitled</code></td>
     </tr>
     <tr>
         <td><code>--description</code></td>
         <td><code>-d</code></td>
         <td>Project description</td>
-        <td><code>-</code></td>
+        <td><code>Project description</code></td>
     </tr>
     <tr>
         <td><code>--description-color</code></td>
@@ -99,29 +87,17 @@ dach
         <td>Dimensions of the banner.</td>
         <td><code>4000x1600</code></td>
     </tr>
-    <tr>
-        <td><code>--background-type</code></td>
-        <td><code>-b</code></td>
-        <td>Background type (gradient or plain).</td>
-        <td><code>Plain</code></td>
+      <tr>
+        <td><code>--rounded-corners</code></td>
+        <td><code>-r</code></td>
+        <td>Rounded corners.</td>
+        <td><code>false</code></td>
     </tr>
     <tr>
-        <td><code>--gradient-positions-preset</code></td>
-        <td><code>-gpp</code></td>
-        <td>Gradient positions preset.</td>
-        <td><code>None</code></td>
-    </tr>
-    <tr>
-        <td><code>--gradient-colors-preset</code></td>
-        <td><code>-gcp</code></td>
-        <td>Gradient colors preset.</td>
-        <td><code>None</code></td>
-    </tr>
-    <tr>
-        <td><code>--background-color</code></td>
-        <td><code>-bc</code></td>
-        <td>Color of banner background.</td>
-        <td><code>#171717</code></td>
+        <td><code>--theme</code></td>
+        <td><code>-</code></td>
+        <td>Theme of the banner.</td>
+        <td><code>elegant</code></td>
     </tr>
 
 </table>
