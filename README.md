@@ -3,7 +3,7 @@
 **Dach**: Democratizing the creation of elegant banners for everyone's project.
 
 > **Note**
-> This project is still in early development. (de-facto partially unusable as of now).
+> This project is still in early development.
 > I would be extremely grateful for any future feedback, issues, or contributions.
 
 ## Overview
