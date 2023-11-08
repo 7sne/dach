@@ -1,0 +1,126 @@
+@import url('../../app/globals.css');
+
+.rcp {
+  display: flex;
+  flex-direction: column;
+  background-color: hsl(var(--background));
+  border: 1px solid hsl(var(--border)) !important;
+}
+
+.rcp-body {
+  display: flex;
+  flex-direction: column;
+  font-weight: 500;
+  gap: 20px;
+  padding: 20px 10px;
+}
+
+.rcp-section {
+  display: flex;
+  flex-direction: column;
+  padding: 0px 16px;
+  gap: 8px;
+}
+
+.rcp-interactive {
+  width: 100%;
+  height: 100%;
+  user-select: none;
+  touch-action: none;
+}
+
+.rcp-saturation {
+  cursor: all-scroll;
+  width: 100%;
+  position: relative;
+  background-image: linear-gradient(to bottom, transparent, black), linear-gradient(to right, white, transparent);
+}
+
+.rcp-saturation-cursor {
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  border: 1px solid white;
+  box-shadow: 0 0 15px 0 rgb(0 0 0 / .15);
+  transform: translate(-10px, -10px);
+}
+
+.rcp-hue {
+  cursor: ew-resize;
+  position: relative;
+  width: 100%;
+  height: 12px;
+  background-image: linear-gradient(
+    to right,
+    rgb(255, 0, 0),
+    rgb(255, 255, 0),
+    rgb(0, 255, 0),
+    rgb(0, 255, 255),
+    rgb(0, 0, 255),
+    rgb(255, 0, 255),
+    rgb(255, 0, 0)
+  );
+}
+
+.rcp-hue-cursor {
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  border: 1px solid white;
+  box-shadow: 0 0 15px 0 rgb(0 0 0 / .15);
+  transform: translate(-10px, -4px);
+}
+
+.rcp-alpha {
+  display: none;
+  cursor: ew-resize;
+  position: relative;
+  width: 100%;
+  height: 12px;
+}
+
+.rcp-alpha-cursor {
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  border: 1px solid white;
+  box-shadow: 0 0 15px 0 rgb(0 0 0 / .15);
+  transform: translate(-10px, -4px);
+}
+
+.rcp-fields {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.rcp-fields-floor {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 10px;
+}
+
+.rcp-field {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.rcp-field-input {
+  width: 100%;
+  font-family: inherit;
+  font-size: 14px;
+  text-align: center;
+  color: hsl(var(--foreground));
+  background-color: transparent;
+  border: 1px solid hsl(var(--border));
+  outline: none;
+  padding: 8px 0;
+}
+
+.rcp-field-label {
+  display: none;
+  font-size: 14px;
+  text-align: center;
+  color: hsl(var(--border));
+}
