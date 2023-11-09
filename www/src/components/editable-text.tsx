@@ -11,8 +11,7 @@ export function EditableText({
     function handleChange(e: React.ChangeEvent<HTMLDivElement>): void {
         if (textarea.current) {
             textarea.current.textContent = e.target.textContent
-            // @ts-ignore
-            handleUpdateText(e)
+            handleUpdateText(e.target.textContent ?? '')
         }
     }
 
@@ -29,14 +28,14 @@ export function EditableText({
             role="textbox"
             contentEditable={true}
             suppressContentEditableWarning={true}
-            onChange={handleChange}
+            onInput={handleChange}
             onKeyDown={(event: React.KeyboardEvent<HTMLParagraphElement>) => {
                 if (
                     (event.currentTarget.innerText.length > maxLength ||
                         event.key === 'Enter') &&
-                    event.key !== 'Backspace'
-                )
-                    event.preventDefault()
+                        event.key !== 'Backspace'
+                        )
+                        event.preventDefault()
             }}
             {...textProps}
         />

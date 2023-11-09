@@ -26,19 +26,22 @@ export default function Home(): React.ReactElement {
                         <path
                             d="M311 1L466.019 269.5H155.981L311 1Z"
                             fill={
-                                tailwindConfig.theme?.extend?.colors?.foreground
+                                // @ts-ignore
+                                tailwindConfig.theme.extend.colors.foreground
                             }
                         />
                         <path
                             d="M76 269.5H147L301.5 0.5H243L76 269.5Z"
                             fill={
-                                tailwindConfig.theme?.extend?.colors?.foreground
+                                // @ts-ignore
+                                tailwindConfig.theme.extend.colors.foreground
                             }
                         />
                         <path
                             d="M0 270H71L225.5 1H167L0 270Z"
                             fill={
-                                tailwindConfig.theme?.extend?.colors?.foreground
+                                // @ts-ignore
+                                tailwindConfig.theme.extend.colors.foreground
                             }
                         />
                     </svg>

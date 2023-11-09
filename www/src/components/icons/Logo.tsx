@@ -1,4 +1,6 @@
-export function Logo(): React.ReactElement {
+import { ReactElement } from "react";
+
+export function Logo(): ReactElement {
     return (
         <svg
             width="36"

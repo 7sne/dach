@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { TouchEventHandler } from 'react'
 import debounce from 'lodash.debounce'
 import { motion, useAnimate, useMotionValue } from 'framer-motion'
 import {
@@ -131,8 +131,10 @@ export function MeshGradientPreview(): React.ReactElement {
             const offsetX = boundClientRect?.left ?? 0
             const offsetY = boundClientRect?.top ?? 0
 
-            const clientX = e.touches?.[0]?.clientX ?? e.clientX
-            const clientY = e.touches?.[0]?.clientY ?? e.clientY
+            const clientX =
+                (e as unknown as TouchEvent).touches?.[0]?.clientX ?? e.clientX
+            const clientY =
+                (e as unknown as TouchEvent).touches?.[0]?.clientY ?? e.clientY
 
             const mx = (clientX - offsetX) / canvasElement.current.width
             const my = (clientY - offsetY) / canvasElement.current.height
@@ -152,7 +154,7 @@ export function MeshGradientPreview(): React.ReactElement {
         [positions],
     )
 
-    const handleMouseUp = useCallback((e: React.MouseEvent) => {
+    const handleMouseUp = useCallback((e: MouseEvent) => {
         e.preventDefault()
         e.stopPropagation()
         // Tell the canvas to stop dragging
@@ -164,7 +166,7 @@ export function MeshGradientPreview(): React.ReactElement {
             if (draggingIndexRef.current !== null && canvasElement?.current) {
                 const updatedPositions = [...positions]
 
-                const touch = e.touches?.[0]
+                const touch = (e as unknown as TouchEvent).touches?.[0]
                 if (touch) {
                     const rect = canvasElement.current.getBoundingClientRect()
                     const offsetX = touch.clientX - rect.left
@@ -333,11 +335,17 @@ export function MeshGradientPreview(): React.ReactElement {
                             imageRendering: 'crisp-edges',
                             touchAction: 'none',
                         }}
-                        onTouchEnd={handleMouseUp}
-                        onTouchMove={handleMouseMove}
-                        onTouchStart={handleMouseDown}
-                        onMouseUp={handleMouseUp}
+                        onMouseUp={e => handleMouseUp}
                         onMouseMove={handleMouseMove}
+                        onTouchEnd={
+                            handleMouseUp as unknown as TouchEventHandler<HTMLCanvasElement>
+                        }
+                        onTouchMove={
+                            handleMouseMove as unknown as TouchEventHandler<HTMLCanvasElement>
+                        }
+                        onTouchStart={
+                            handleMouseDown as unknown as TouchEventHandler<HTMLCanvasElement>
+                        }
                         onMouseDown={
                             handleMouseDown as unknown as MouseEventHandler<HTMLCanvasElement>
                         }
