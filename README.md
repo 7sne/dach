@@ -1,10 +1,9 @@
+> **Note**
+> This project is currently in its early stages of development, and there may be instances where it is either not functioning as intended or experiencing issues. Your feedback, as well as any identified issues or contributions, would be greatly appreciated in shaping its future progress. Thank you for your understanding  and support.
+
 ![Satori](.github/card.png)
 
 **Dach**: Democratizing the creation of elegant banners for everyone's project.
-
-> **Note**
-> This project is still in early development.
-> I would be extremely grateful for any future feedback, issues, or contributions.
 
 ## Overview
 
