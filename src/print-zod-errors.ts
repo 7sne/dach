@@ -1,7 +1,7 @@
-import type { z } from 'zod'
 import chalk from 'chalk'
+import type { ZodError } from 'zod'
 
-export function printZodErrors(errorMessage: string, zodError: z.ZodError, hint: string): void {
+export function printZodErrors(errorMessage: string, zodError: ZodError, hint: string): void {
     console.error(
         '\n',
         chalk.bold(chalk.red(errorMessage)),
