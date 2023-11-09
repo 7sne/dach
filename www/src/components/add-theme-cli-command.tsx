@@ -13,11 +13,11 @@ export function AddThemeCliCommand(): ReactElement {
     const { positions } = useRgbPositions()
     const { text } = useText()
 
-    const command = `${text.title.toLocaleLowerCase()} --colors ${colors.map(
-        color => ` ${color}`,
-    )} --positions ${JSON.stringify(
+    const command = `${text.title.toLocaleLowerCase()} --colors '${JSON.stringify(
+        colors,
+    )}' --positions '${JSON.stringify(
         positions,
-    )} --title-color ${title} --description-color ${description}`
+    )}' --title-color "${title}" --description-color "${description}"`
 
     return (
         <GeneratedCliCommand className="border border-t">
@@ -25,7 +25,7 @@ export function AddThemeCliCommand(): ReactElement {
                 ▲ <span className="font-bold text-emerald-400">dach</span>{' '}
                 <span className="font-bold text-pink-400">add</span> {command}
             </GeneratedCliCommand.Text>
-            <CopyToClipboard text={command} />
+            <CopyToClipboard text={`dach add ${command}`} />
         </GeneratedCliCommand>
     )
 }
