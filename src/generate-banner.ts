@@ -1,12 +1,15 @@
+/* eslint-disable @typescript-eslint/indent */
 import * as process from 'node:process'
 import * as canvas from 'canvas'
 import * as Yoga from 'yoga-layout-prebuilt'
 
 import { hexCodesToRgb } from './rgb'
 import { gradientImageData } from './gradient-image-data'
-import type { BackgroundConfig, BannerSettings, Theme } from './schema'
+import { themeSchema } from './schema'
+import type { BackgroundConfig, BannerSettings, TextConfig } from './schema'
 import { colorPresetToColor } from './color-presets'
 import { positionPresetToPositions } from './position-presets'
+import { config } from './themes'
 
 export type Position = {
     x: number
@@ -25,7 +28,54 @@ export function generateBanner(
     let coreCanvas = canvas.createCanvas(...dimensions)
     let coreCanvasContext = coreCanvas.getContext('2d')
 
-    const backgroundConfig = makeCanvasBackground(coreCanvas, coreCanvasContext, theme, dimensions)
+    let text = convertThemeToTextConfig(theme)
+
+    if (isPredefinedTheme(theme)) {
+        const customThemeConfig = config.get('dach-themes').themes.find(t => t.name === theme)
+
+        if (!customThemeConfig) {
+        // @todo - add hint.
+            console.error(`Theme ${theme} not found.`)
+            process.exit(1)
+        }
+
+        text.titleColor = customThemeConfig.titleColor
+        text.descriptionColor = customThemeConfig.descriptionColor
+
+        makeBackgroundGradient(
+            coreCanvas,
+            coreCanvasContext,
+            dimensions,
+            {
+                colors: JSON.parse(customThemeConfig.colors),
+                positions: JSON.parse(customThemeConfig.positions),
+            },
+        )
+    } else {
+        const { background, type } = convertThemeToBackgroundConfig(theme)
+        text = convertThemeToTextConfig(theme)
+
+        if (type === 'gradient') {
+            const colors = colorPresetToColor[background.colorsPreset]
+            const positions = positionPresetToPositions[background.positionsPreset]
+
+            makeBackgroundGradient(
+                coreCanvas,
+                coreCanvasContext,
+                dimensions,
+                {
+                    colors,
+                    positions,
+                },
+            )
+        } else if (type === 'plain') {
+            makeBackgroundPlainColor(
+                coreCanvasContext,
+                dimensions,
+                background.color,
+            )
+        }
+    }
 
     const registerFontsError = registerFonts()
 
@@ -51,15 +101,15 @@ export function generateBanner(
     const descriptionNode = Yoga.Node.create()
 
     // Create space between title and description.
-    titleNode.setPadding(Yoga.EDGE_BOTTOM, 296 * 0.8)
+    titleNode.setPadding(Yoga.EDGE_BOTTOM, 296 * 0.74)
 
     // Arrange title and description in the center of the canvas.
     makeLayout(coreCanvas, { title: titleNode, description: descriptionNode })
 
     // Draw title and description.
-    // @todo - Handle these things better!
-    coreCanvasContext.fillStyle = backgroundConfig.text.titleColor ?? '#ffffff'
-    coreCanvasContext.font = 'extrabold 296px Geist sans'
+    // @todo - Handle these things better.
+    coreCanvasContext.fillStyle = text.titleColor ?? '#ffffff'
+    coreCanvasContext.font = '296px "Geist"'
     coreCanvasContext.fillText(
         title,
         titleNode.getComputedLeft(),
@@ -67,8 +117,8 @@ export function generateBanner(
     )
 
     // @todo - Handle these things better!
-    coreCanvasContext.fillStyle = backgroundConfig.text.descriptionColor ?? '#ffffff'
-    coreCanvasContext.font = '112px Geist sans'
+    coreCanvasContext.fillStyle = text.descriptionColor ?? '#ffffff'
+    coreCanvasContext.font = 'light 100px "GeistLight"'
     coreCanvasContext.fillText(
         description,
         descriptionNode.getComputedLeft(),
@@ -78,29 +128,49 @@ export function generateBanner(
     return coreCanvas
 }
 
-/* eslint-disable @typescript-eslint/indent */
-function convertThemeToBackgroundConfig(theme: Theme): BackgroundConfig {
+function convertThemeToTextConfig(theme: string): TextConfig {
+    switch (theme) {
+    case 'blaze':
+        return {
+            titleColor: '#f5f5f5',
+            descriptionColor: '#f5f5f5',
+        }
+    case 'flora':
+        return {
+            titleColor: '#050505',
+            descriptionColor: '#050505',
+        }
+    case 'funk':
+        return {
+            titleColor: '#f5f5f5',
+            descriptionColor: '#f5f5f5',
+        }
+    case 'elegant':
+        return {
+            titleColor: '#f5f5f5',
+            descriptionColor: '#f5f5f5',
+        }
+    default:
+        return {
+            titleColor: '#f5f5f5',
+            descriptionColor: '#f5f5f5',
+        }
+    }
+}
+
+function convertThemeToBackgroundConfig(theme: string): BackgroundConfig {
     switch (theme) {
     case 'blaze':
         return {
             type: 'gradient',
-            text: {
-                titleColor: '#f5f5f5',
-                descriptionColor: '#f5f5f5',
-            },
             background: {
                 colorsPreset: 'blaze',
                 positionsPreset: 14,
             },
         }
-
     case 'flora':
         return {
             type: 'gradient',
-            text: {
-                titleColor: '#050505',
-                descriptionColor: '#050505',
-            },
             background: {
                 colorsPreset: 'flora',
                 positionsPreset: 2,
@@ -109,10 +179,6 @@ function convertThemeToBackgroundConfig(theme: Theme): BackgroundConfig {
     case 'funk':
         return {
             type: 'gradient',
-            text: {
-                titleColor: '#f5f5f5',
-                descriptionColor: '#f5f5f5',
-            },
             background: {
                 colorsPreset: 'funk',
                 positionsPreset: 20,
@@ -121,10 +187,6 @@ function convertThemeToBackgroundConfig(theme: Theme): BackgroundConfig {
     case 'orange':
         return {
             type: 'gradient',
-            text: {
-                titleColor: '#050505',
-                descriptionColor: '#050505',
-            },
             background: {
                 colorsPreset: 'orange',
                 positionsPreset: 4,
@@ -133,10 +195,6 @@ function convertThemeToBackgroundConfig(theme: Theme): BackgroundConfig {
     case 'elegant':
         return {
             type: 'plain',
-            text: {
-                titleColor: '#f5f5f5',
-                descriptionColor: '#f5f5f5',
-            },
             background: {
                 color: '#080808',
             },
@@ -144,10 +202,6 @@ function convertThemeToBackgroundConfig(theme: Theme): BackgroundConfig {
     default:
         return {
             type: 'plain',
-            text: {
-                titleColor: '#f5f5f5',
-                descriptionColor: '#f5f5f5',
-            },
             background: {
                 color: '#080808',
             },
@@ -155,39 +209,8 @@ function convertThemeToBackgroundConfig(theme: Theme): BackgroundConfig {
     }
 }
 
-function makeCanvasBackground(
-    coreCanvas: canvas.Canvas,
-    coreCanvasContext: canvas.CanvasRenderingContext2D,
-    theme: Theme,
-    dimensions: [number, number],
-): BackgroundConfig {
-    const { background, text, type } = convertThemeToBackgroundConfig(theme)
-
-    if (type === 'gradient') {
-        const colors = colorPresetToColor[background.colorsPreset]
-        const positions = positionPresetToPositions[background.positionsPreset]
-
-        makeBackgroundGradient(
-            coreCanvas,
-            coreCanvasContext,
-            dimensions,
-            {
-                ...background,
-                colors,
-                positions,
-            },
-        )
-    }
-
-    if (type === 'plain') {
-        makeBackgroundPlainColor(
-            coreCanvasContext,
-            dimensions,
-            background.color,
-        )
-    }
-
-    return { background, text, type } as BackgroundConfig
+function isPredefinedTheme(theme: string): boolean {
+    return !themeSchema.safeParse(theme).success
 }
 
 function makeBackgroundGradient(
@@ -200,6 +223,7 @@ function makeBackgroundGradient(
     },
 ): void {
     const { positions, colors } = gradientConfig
+
     const rgbGradientColors = hexCodesToRgb(colors)
     const imageData = gradientImageData(
         context,
@@ -223,9 +247,8 @@ function makeBackgroundPlainColor(
 
 function registerFonts(): Error | void {
     try {
-        const geistFontPath = `${process.cwd()}/assets/Geist.ttf`
-        canvas.registerFont(geistFontPath, { family: 'Geist' })
-        canvas.registerFont(geistFontPath, { family: 'Geist' })
+        // @todo - Currently loading fonts is absolutely broken, and I can't find a clear solution.
+        // @see https://github.com/Automattic/node-canvas/issues/2097#issuecomment-1803950952.
     } catch (e) {
         return e as Error
     }
