@@ -37,7 +37,6 @@
     },
     "devDependencies": {
         "@antfu/eslint-config": "^0.39.5",
-        "@types/conf": "^3.0.0",
         "@types/node": "^20.4.8",
         "@types/pixelmatch": "^5.2.4",
         "@types/pngjs": "^6.0.1",
