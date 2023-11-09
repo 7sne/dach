@@ -1,6 +1,6 @@
 {
     "name": "dach",
-    "version": "1.0.0",
+    "version": "1.1.0",
     "description": "",
     "author": "Maciej Kukielka (7sne)",
     "license": "MIT",
@@ -19,7 +19,7 @@
     ],
     "scripts": {
         "build": "pnpm unbuild",
-        "release": "vitest run && changelogen --release && git push --follow-tags && npm publish",
+        "release": "npm publish",
         "stub": "pnpm unbuild --stub",
         "lint": "eslint --ext .ts,.js . && prettier src/**/*.ts test/**/*.ts",
         "lint:fix": "eslint --fix --ext .ts,.js . && prettier --write src/**/*.ts test/**/*.ts",
