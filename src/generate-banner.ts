@@ -31,7 +31,8 @@ export function generateBanner(
     let text = convertThemeToTextConfig(theme)
 
     if (isPredefinedTheme(theme)) {
-        const customThemeConfig = config.get('dach-themes').themes.find(t => t.name === theme)
+        const customThemeConfig = config.get('dach-themes')
+            .themes.find((t: { name: string }) => t.name === theme)
 
         if (!customThemeConfig) {
         // @todo - add hint.
