@@ -110,7 +110,7 @@ export function generateBanner(
     // Draw title and description.
     // @todo - Handle these things better.
     coreCanvasContext.fillStyle = text.titleColor ?? '#ffffff'
-    coreCanvasContext.font = '296px "Geist"'
+    coreCanvasContext.font = 'bold 296px "Geist"'
     coreCanvasContext.fillText(
         title,
         titleNode.getComputedLeft(),
