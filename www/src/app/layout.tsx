@@ -1,8 +1,8 @@
+import './globals.css'
+
 import type { Metadata } from 'next'
 import { GeistSans, GeistMono } from 'geist/font'
-import './globals.css'
 import { ReactNode } from 'react'
-import { ThemeProvider } from 'next-themes'
 import { Providers } from './providers'
 
 export const metadata: Metadata = {

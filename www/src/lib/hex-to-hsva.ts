@@ -11,7 +11,7 @@ export function hexToHsva(hex: string): { h: number, s: number, v: number, a: nu
   let h = 0;
   let s = 0;
   let v = max;
-  const a = parseFloat((parseInt(hex.slice(6, 8), 16) / 255).toFixed(2)); // Extract alpha and round to 2 decimal places
+  const a = parseFloat((parseInt(hex.slice(6, 8), 16) / 255).toFixed(2));
 
   const d = max - min;
 

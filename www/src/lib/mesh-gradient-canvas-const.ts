@@ -5,7 +5,6 @@ export const CANVAS_DEFAULT_SIZE_X = 3000
 export const CANVAS_DEFAULT_SIZE_Y = 1600
 export const RESIZE_HANDLE_WIDTH_PX = 24
 export const RESIZE_HANDLE_HEIGHT_PX = 24
-export const DOWN_SCALE_FACTOR = usingMobile() ? 0.105 : 0.19
 
 export const DEFAULT_RGB_POSITONS = [
   { x: 0.49618420439786215, y: 0.22918175634846816 },

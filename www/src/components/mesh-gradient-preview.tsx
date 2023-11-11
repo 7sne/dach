@@ -13,7 +13,6 @@ import { hexCodesToRgb } from '../lib/hex-codes-to-rgb'
 import { gradientImageData } from '../lib/gradient-image-data'
 import {
     CANVAS_DEFAULT_SIZE_X,
-    DOWN_SCALE_FACTOR,
     CANVAS_DEFAULT_SIZE_Y,
 } from '../lib/mesh-gradient-canvas-const'
 import { useColors } from '../store/store-colors'
@@ -24,6 +23,7 @@ import { useRgbPositions } from '../store/store-rgb-positions'
 import { useText } from '../store/store-text'
 import { useSize } from '../store/store-sizing'
 import { controlBoxWithAdaptiveColor } from '../lib/control-box-with-adaptive-color'
+import { downscaleFactor } from '../lib/downscale-factor'
 
 const modeTabs = [
     { id: 'text', label: 'Text' },
@@ -37,6 +37,8 @@ const ratioTabs = [
     { id: '21:9', label: '21:9' },
 ]
 
+const downscaleFac = downscaleFactor()
+
 export function MeshGradientPreview(): React.ReactElement {
     const { colors, textColor } = useColors()
 
@@ -45,8 +47,8 @@ export function MeshGradientPreview(): React.ReactElement {
 
     const { positions, writePositions } = useRgbPositions()
 
-    const mWidth = useMotionValue(CANVAS_DEFAULT_SIZE_X * DOWN_SCALE_FACTOR)
-    const mHeight = useMotionValue(CANVAS_DEFAULT_SIZE_Y * DOWN_SCALE_FACTOR)
+    const mWidth = useMotionValue(CANVAS_DEFAULT_SIZE_X * downscaleFac)
+    const mHeight = useMotionValue(CANVAS_DEFAULT_SIZE_Y * downscaleFac)
 
     const { ratio, writeRatio, writeSize } = useSize()
     const {
@@ -195,16 +197,16 @@ export function MeshGradientPreview(): React.ReactElement {
         if (!vertical) {
             const newHeight = mHeight.get() + info.delta.y
             if (
-                2000 > newHeight / DOWN_SCALE_FACTOR &&
-                1200 < newHeight / DOWN_SCALE_FACTOR
+                2000 > newHeight / downscaleFac &&
+                1200 < newHeight / downscaleFac
             ) {
                 mHeight.set(newHeight)
             }
         } else {
             const newWidth = mWidth.get() + info.delta.x
             if (
-                4600 > newWidth / DOWN_SCALE_FACTOR &&
-                1800 < newWidth / DOWN_SCALE_FACTOR
+                4600 > newWidth / downscaleFac &&
+                1800 < newWidth / downscaleFac
             ) {
                 mWidth.set(newWidth)
             }
@@ -217,8 +219,8 @@ export function MeshGradientPreview(): React.ReactElement {
         }
 
         updateSize({
-            width: Math.floor(mWidth.get() / DOWN_SCALE_FACTOR),
-            height: Math.floor(mHeight.get() / DOWN_SCALE_FACTOR),
+            width: Math.floor(mWidth.get() / downscaleFac),
+            height: Math.floor(mHeight.get() / downscaleFac),
         })
     }
 
@@ -244,23 +246,23 @@ export function MeshGradientPreview(): React.ReactElement {
 
         switch (ratio) {
             case '2:1':
-                mWidth.set(3000 * DOWN_SCALE_FACTOR)
-                mHeight.set(1500 * DOWN_SCALE_FACTOR)
+                mWidth.set(3000 * downscaleFac)
+                mHeight.set(1500 * downscaleFac)
                 set()
                 break
             case '21:9':
-                mWidth.set(3000 * DOWN_SCALE_FACTOR)
-                mHeight.set(1285 * DOWN_SCALE_FACTOR)
+                mWidth.set(3000 * downscaleFac)
+                mHeight.set(1285 * downscaleFac)
                 set()
                 break
             case '16:10':
-                mWidth.set(3000 * DOWN_SCALE_FACTOR)
-                mHeight.set(1875 * DOWN_SCALE_FACTOR)
+                mWidth.set(3000 * downscaleFac)
+                mHeight.set(1875 * downscaleFac)
                 set()
                 break
             case '16:9':
-                mWidth.set(3000 * DOWN_SCALE_FACTOR)
-                mHeight.set(1685 * DOWN_SCALE_FACTOR)
+                mWidth.set(3000 * downscaleFac)
+                mHeight.set(1685 * downscaleFac)
                 set()
                 break
             default:
@@ -297,17 +299,15 @@ export function MeshGradientPreview(): React.ReactElement {
                     {editMode === 'text' && (
                         <div className="absolute z-0 flex flex-col items-center justify-center w-full h-full overflow-hidden">
                             <EditableText
+                                data-title
                                 text={title}
                                 maxLength={20}
                                 handleUpdateText={writeTitle}
                                 textProps={{
                                     className:
-                                        'leading-[2.2rem] sm:leading-[4rem] font-extrabold text-secondary whitespace-nowrap outline-black focus:outline-none',
+                                        'title text-3xl sm:text-6xl leading-[2rem] sm:leading-[3.4rem] font-extrabold text-secondary whitespace-nowrap outline-black focus:outline-none',
                                     style: {
                                         color: textColor.title,
-                                        fontSize: `${
-                                            296 * DOWN_SCALE_FACTOR
-                                        }px`,
                                     },
                                 }}
                             />
@@ -317,12 +317,9 @@ export function MeshGradientPreview(): React.ReactElement {
                                 handleUpdateText={writeDescription}
                                 textProps={{
                                     className:
-                                        'font-light text-secondary outline-black focus:outline-none',
+                                        'font-light text-sm sm:text-xl text-secondary outline-black focus:outline-none',
                                     style: {
                                         color: textColor.description,
-                                        fontSize: `${
-                                            112 * DOWN_SCALE_FACTOR
-                                        }px`,
                                     },
                                 }}
                             />
@@ -335,8 +332,13 @@ export function MeshGradientPreview(): React.ReactElement {
                             imageRendering: 'crisp-edges',
                             touchAction: 'none',
                         }}
-                        onMouseUp={e => handleMouseUp}
                         onMouseMove={handleMouseMove}
+                        onMouseUp={
+                            handleMouseUp as unknown as MouseEventHandler<HTMLCanvasElement>
+                        }
+                        onMouseDown={
+                            handleMouseDown as unknown as MouseEventHandler<HTMLCanvasElement>
+                        }
                         onTouchEnd={
                             handleMouseUp as unknown as TouchEventHandler<HTMLCanvasElement>
                         }
@@ -345,9 +347,6 @@ export function MeshGradientPreview(): React.ReactElement {
                         }
                         onTouchStart={
                             handleMouseDown as unknown as TouchEventHandler<HTMLCanvasElement>
-                        }
-                        onMouseDown={
-                            handleMouseDown as unknown as MouseEventHandler<HTMLCanvasElement>
                         }
                     />
                     <MeshGradientDragHandle
