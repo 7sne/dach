@@ -12,11 +12,7 @@ export function ColorPicker({
     handleUpdateColor,
 }: Props): ReactElement | null {
     const colorPickerElement = useRef<HTMLDivElement>(null)
-    const [selectedColor, setSelectedColor] = useState<Color>({
-        hex: color.hex,
-        hsv: color.hsv,
-        rgb: color.rgb,
-    })
+    const [selectedColor, setSelectedColor] = useState<Color>(color)
 
     function handleSelectColor(color: Color): void {
         setSelectedColor(color)
@@ -34,13 +30,17 @@ export function ColorPicker({
         >
             <ReactColorPicker
                 height={120}
-                color={{
-                    hex: selectedColor.hex,
-                    hsv: selectedColor.hsv,
-                    rgb: selectedColor.rgb,
-                }}
+                color={selectedColor}
                 onChange={color => {
-                    handleSelectColor(color)
+                    const fixedColor: Record<string, any> = {}
+                    // Library used here for some reason can't handle alpha values correctly.
+                    if (Number.isNaN(Number.parseInt(color.hex.slice(7, 10))))
+                        fixedColor['hex'] = color.hex.slice(0, 7)
+
+                    handleSelectColor({
+                        ...color,
+                        ...fixedColor,
+                    })
                 }}
             />
         </div>

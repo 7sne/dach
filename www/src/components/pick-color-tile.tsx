@@ -29,8 +29,7 @@ export function PickColorTile({
                 }}
                 showState={[displayColorPicker, setDisplayColorPicker]}
                 handleUpdateColor={color => {
-                    // As of now we don't support alpha yet the library wants us to handle it.
-                    handleWriteColor(color.hex.slice(0, 7))
+                    handleWriteColor(color.hex)
                 }}
             />
         </div>

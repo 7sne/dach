@@ -9,7 +9,6 @@ export function GenerateBannerCliCommand(): ReactElement {
         text: { title, description },
     } = useText()
     const { ratio, size } = useSize()
-    console.log(title, description)
 
     let command = `--output "./.github" --title "${title}" --description "${description}" --theme ${title.toLocaleLowerCase()}`
 

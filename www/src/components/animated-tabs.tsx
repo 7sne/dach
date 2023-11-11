@@ -14,7 +14,7 @@ export function AnimatedTabs({
                     style={{ WebkitTapHighlightColor: 'transparent' }}
                     className={`${
                         activeTab === tab.id
-                            ? 'text-destructive-foreground'
+                            ? '!text-primary sm:!text-destructive-foreground'
                             : 'text-foreground hover:text-foreground'
                     } relative px-3 py-1.5 text-sm font-normal transition focus-visible:outline-2`}
                     onClick={() => handleUpdateActiveTab(tab.id)}
