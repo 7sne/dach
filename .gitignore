@@ -1,5 +1,40 @@
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+
+# dependencies
 node_modules
+dist/
+
+# next.js
+.next/
+/out/
+
+# production
+/build
+
+# misc
 .DS_Store
-dist
-cache.json
-src_0
+*.pem
+
+# debug
+.pnpm-debug.log*
+
+# local env files
+.env*.local
+.env
+
+# vercel
+.vercel
+
+# turbo
+.turbo
+
+# typescript
+*.tsbuildinfo
+next-env.d.ts
+
+# Ignore diff between screenshots, we only care about baseline.
+apps/www/cypress-visual-screenshots/diff/*
+apps/www/cypress-visual-report
+apps/cli/coverage
+apps/cli/*.png
+

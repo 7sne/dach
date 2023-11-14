@@ -1,0 +1,55 @@
+{
+    "name": "@dach/shared",
+    "version": "0.0.1",
+    "description": "Shared features between `@dach/www` and `@dach/cli`.",
+    "author": "Maciej Kukielka <matthiaskukielka@gmail.com>",
+    "keywords": [
+        "banner",
+        "generator",
+        "theme",
+        "cli",
+        "art",
+        "readme",
+        "tool"
+    ],
+    "license": "MIT",
+    "homepage": "https://dach.kukielka.xyz",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/7sne/dach.git"
+    },
+    "bugs": {
+        "url": "https://github.com/7sne/dach/issues"
+    },
+    "main": "./dist/index.js",
+    "module": "./dist/index.mjs",
+    "types": "./dist/index.d.ts",
+    "files": [
+        "dist/**"
+    ],
+    "scripts": {
+        "build": "tsup",
+        "dev": "tsup --watch",
+        "test": "vitest",
+        "lint": "eslint src/**/*.ts",
+        "typecheck": "tsc --noEmit"
+    },
+    "devDependencies": {
+        "@types/node": "18.11.9",
+        "@types/pixelmatch": "^5.2.4",
+        "@types/pngjs": "^6.0.1",
+        "@antfu/eslint-config": "^0.39.5",
+        "canvas": "^2.10.2",
+        "tsup": "^6.1.3",
+        "typescript": "^5.1.6",
+        "vitest": "^0.34.4"
+    },
+    "publishConfig": {
+        "access": "public"
+    },
+    "dependencies": {
+        "pixelmatch": "^5.3.0",
+        "pngjs": "^7.0.0"
+    },
+    "packageManager": "pnpm@8.6.7"
+}
