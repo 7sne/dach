@@ -26,8 +26,8 @@ jobs:
                   node-version: ${{ matrix.node }}
                   cache: 'pnpm'
 
-            - run: pnpm build
             - run: pnpm install
+            - run: pnpm build
             - run: pnpm typecheck
             - run: pnpm lint
             - run: pnpm format
@@ -39,7 +39,7 @@ jobs:
         strategy:
             matrix:
                 os: [ubuntu-latest]
-                node: [16]
+                node: [18]
 
         steps:
             - uses: actions/checkout@v3
@@ -51,5 +51,8 @@ jobs:
               with:
                   node-version: ${{ matrix.node }}
                   cache: 'pnpm'
+
+            - run: pnpm install
+            - run: pnpm build
 
             - run: pnpm test:e2e
