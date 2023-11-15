@@ -21,6 +21,7 @@ describe('Generate banner', () => {
                 path.join(sandboxDirectoryPath, 'project-banner.png'),
             ),
         )
+        console.log('---------------------------------', vr)
         expect(vr).not.instanceOf(Error)
     })
 
