@@ -8,18 +8,8 @@ import { visualRegression } from '@dach/shared'
 const sandboxDirectoryPath = `${process.cwd()}/test/sandbox`
 
 describe('Generate banner', () => {
-    beforeAll(async () => {
-        if (fssync.existsSync(sandboxDirectoryPath))
-            await fs.rm(sandboxDirectoryPath, { recursive: true })
-    })
-
-    beforeEach(async () => {
-        await fs.mkdir(sandboxDirectoryPath)
-    })
-
-    afterEach(async () => {
-        await fs.rm(sandboxDirectoryPath, { recursive: true })
-    })
+    beforeAll(async () => fs.mkdir(sandboxDirectoryPath))
+    afterAll(async () => fs.rmdir(sandboxDirectoryPath, { recursive: true }))
 
     test('should generate banner with default configuration.', async () => {
         await execaCommand(
@@ -109,18 +99,8 @@ describe('Generate banner', () => {
 })
 
 describe('Generate themed banner.', () => {
-    beforeAll(async () => {
-        if (fssync.existsSync(sandboxDirectoryPath))
-            await fs.rm(sandboxDirectoryPath, { recursive: true })
-    })
-
-    beforeEach(async () => {
-        await fs.mkdir(sandboxDirectoryPath)
-    })
-
-    afterEach(async () => {
-        await fs.rm(sandboxDirectoryPath, { recursive: true })
-    })
+    beforeAll(async () => fs.mkdir(sandboxDirectoryPath))
+    afterAll(async () => fs.rmdir(sandboxDirectoryPath, { recursive: true }))
 
     test('should generate banner using default themes.', async () => {
         await execa('node', [
@@ -147,7 +127,7 @@ describe('Generate themed banner.', () => {
     })
 
     test('should add custom theme and generate banner using it.', async () => {
-        const a = await execa('node', [
+        const addCommandProcessResult = await execa('node', [
             'dist/cli.cjs',
             'add',
             'custom',
@@ -161,7 +141,7 @@ describe('Generate themed banner.', () => {
             '#ffffff',
         ])
 
-        expect(a.exitCode).toBe(0)
+        expect(addCommandProcessResult.exitCode).toBe(0)
 
         await execa('node', [
             'dist/cli.cjs',

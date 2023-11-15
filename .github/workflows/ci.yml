@@ -1,8 +1,8 @@
 name: ci
 
 on:
-    push:
     pull_request:
+    push:
         branches:
             - main
 
@@ -54,6 +54,6 @@ jobs:
 
             - run: pnpm install
             - run: pnpm build
-            - run: pnpm dev
+            - run: pnpm dev --filter www
 
             - run: pnpm test:e2e
