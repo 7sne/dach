@@ -6,23 +6,24 @@ import { describe } from 'vitest'
 import { visualRegression } from '@dach/shared'
 
 const sandboxDirectoryPath = `${process.cwd()}/test/sandbox`
+const baselineDirectoryPath = `${process.cwd()}/test/baseline`
 
 describe('Generate banner', () => {
     beforeAll(async () => fs.mkdir(sandboxDirectoryPath))
     afterAll(async () => fs.rmdir(sandboxDirectoryPath, { recursive: true }))
 
     test('should generate banner with default configuration.', async () => {
-        await execaCommand(
-            `node dist/cli.cjs generate --output ${sandboxDirectoryPath}`,
-        )
-        const vr = visualRegression(
-            fssync.readFileSync('./test/baseline/default-test-banner.png'),
-            fssync.readFileSync(
-                path.join(sandboxDirectoryPath, 'project-banner.png'),
+        await execaCommand(`pnpm dev generate --output ${sandboxDirectoryPath}`)
+        expect(
+            visualRegression(
+                fssync.readFileSync(
+                    path.join(baselineDirectoryPath, 'default-test-banner.png'),
+                ),
+                fssync.readFileSync(
+                    path.join(sandboxDirectoryPath, 'project-banner.png'),
+                ),
             ),
-        )
-        console.log('---------------------------------', vr)
-        expect(vr).not.instanceOf(Error)
+        ).not.instanceOf(Error)
     })
 
     // test('should generate banner with `output` provided.', async () => {
