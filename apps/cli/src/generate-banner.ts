@@ -1,3 +1,4 @@
+import * as path from 'node:path'
 import * as canvas from 'canvas'
 import * as Yoga from 'yoga-layout-prebuilt'
 
@@ -42,15 +43,6 @@ export function generateBanner({
 
     if (registerFontsError) return registerFontsError
 
-    if (roundedCorners) {
-        const [roundedBannerCanvas, roundedBannerContext] = makeBannerRounded(
-            coreCanvas,
-            dimensions,
-        )
-        coreCanvas = roundedBannerCanvas
-        coreCanvasContext = roundedBannerContext
-    }
-
     // Generic settings for every banner.
     coreCanvasContext.globalAlpha = 0.98
     coreCanvasContext.textAlign = 'center'
@@ -69,21 +61,29 @@ export function generateBanner({
     // Draw title and description.
     // @todo - Handle these things better.
     coreCanvasContext.fillStyle = text.titleColor ?? '#ffffff'
-    coreCanvasContext.font = 'bold 296px "Geist"'
+    coreCanvasContext.font = 'bold 296px "GeistBold"'
     coreCanvasContext.fillText(
         title,
         titleNode.getComputedLeft(),
         titleNode.getComputedTop(),
     )
 
-    // @todo - Handle these things better!
     coreCanvasContext.fillStyle = text.descriptionColor ?? '#ffffff'
-    coreCanvasContext.font = 'light 100px "GeistLight"'
+    coreCanvasContext.font = 'medium 100px "GeistMedium"'
     coreCanvasContext.fillText(
         description,
         descriptionNode.getComputedLeft(),
         descriptionNode.getComputedTop(),
     )
+
+    if (roundedCorners) {
+        const [roundedBannerCanvas, roundedBannerContext] = makeBannerRounded(
+            coreCanvas,
+            dimensions,
+        )
+        coreCanvas = roundedBannerCanvas
+        coreCanvasContext = roundedBannerContext
+    }
 
     return coreCanvas
 }
@@ -274,8 +274,14 @@ function makeBackgroundPlainColor(
 
 function registerFonts(): Error | void {
     try {
-        // @todo - Currently loading fonts is absolutely broken, and I can't find a clear solution.
-        // @see https://github.com/Automattic/node-canvas/issues/2097#issuecomment-1803950952.
+        canvas.registerFont(path.join(process.cwd(), 'assets', 'Geist.ttf'), {
+            family: 'GeistBold',
+            weight: 'bold',
+        })
+        canvas.registerFont(path.join(process.cwd(), 'assets', 'Geist.ttf'), {
+            family: 'GeistMedium',
+            weight: 'medium',
+        })
     } catch (e) {
         return e as Error
     }

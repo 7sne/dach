@@ -50,14 +50,14 @@ describe('Generate banner', () => {
             '--title',
             'Title test',
         ])
-        const visreg = visualRegression(
-            fssync.readFileSync('./test/baseline/title-test-banner.png'),
-            fssync.readFileSync(
-                path.join(sandboxDirectoryPath, 'project-banner.png'),
+        expect(
+            visualRegression(
+                fssync.readFileSync('./test/baseline/title-test-banner.png'),
+                fssync.readFileSync(
+                    path.join(sandboxDirectoryPath, 'project-banner.png'),
+                ),
             ),
-        )
-        console.log(visreg)
-        expect(visreg).not.instanceOf(Error)
+        ).not.instanceOf(Error)
     }, 15_000)
 
     test('should generate banner with `title`, `description` and `rounded-corners` provided.', async () => {
