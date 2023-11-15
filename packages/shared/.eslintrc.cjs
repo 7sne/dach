@@ -2,9 +2,9 @@
 module.exports = {
     extends: ['@antfu'],
     rules: {
+        indent: 'off',
         'arrow-parens': ['error', 'as-needed'],
         'quote-props': ['error', 'as-needed'],
-        indent: 'off',
         '@typescript-eslint/indent': 'off',
         '@typescript-eslint/brace-style': 'off',
         '@typescript-eslint/no-redeclare': 'off',

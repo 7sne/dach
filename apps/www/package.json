@@ -26,8 +26,10 @@
         "start": "next start",
         "build": "next build",
         "lint": "next lint",
+        "format": "prettier src/**/*.ts test/**/*.ts",
+        "format:fix": "prettier --write src/**/*.ts test/**/*.ts",
         "typecheck": "tsc --noEmit",
-        "test:e2e": "pnpm start && wait-on http://localhost:3000 && cypress run"
+        "test:e2e": "wait-on http://localhost:3000 && cypress run"
     },
     "dependencies": {
         "@dach/shared": "workspace:*",

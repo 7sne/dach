@@ -39,8 +39,8 @@
         "release": "npm publish",
         "test": "vitest run --coverage",
         "stub": "pnpm unbuild --stub",
-        "lint": "eslint --ext .ts,.js . && prettier src/**/*.ts test/**/*.ts",
-        "lint:fix": "eslint --fix --ext .ts,.js . && prettier --write src/**/*.ts test/**/*.ts",
+        "lint": "eslint --ext .ts,.js .",
+        "lint:fix": "eslint --fix --ext .ts,.js .",
         "format": "prettier src/**/*.ts test/**/*.ts",
         "format:fix": "prettier --write src/**/*.ts test/**/*.ts",
         "typecheck": "tsc --noEmit"

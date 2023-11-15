@@ -31,7 +31,10 @@
         "build": "tsup",
         "dev": "tsup --watch",
         "test": "vitest",
-        "lint": "eslint src/**/*.ts",
+        "lint": "eslint --ext .ts,.js .",
+        "lint:fix": "eslint --fix --ext .ts,.js .",
+        "format": "prettier src/**/*.ts",
+        "format:fix": "prettier --write src/**/*.ts",
         "typecheck": "tsc --noEmit"
     },
     "devDependencies": {
