@@ -17,7 +17,7 @@ describe('Generate banner', () => {
         expect(
             visualRegression(
                 fssync.readFileSync(
-                    path.join(baselineDirectoryPath, 'default-test-banner.png'),
+                    path.join(baselineDirectoryPath, 'project-banner.png'),
                 ),
                 fssync.readFileSync(
                     path.join(sandboxDirectoryPath, 'project-banner.png'),

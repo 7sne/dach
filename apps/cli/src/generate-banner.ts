@@ -49,32 +49,32 @@ export function generateBanner({
     coreCanvasContext.textBaseline = 'middle'
 
     // Create text nodes for title and description.
-    const titleNode = Yoga.Node.create()
-    const descriptionNode = Yoga.Node.create()
+    // const titleNode = Yoga.Node.create()
+    // const descriptionNode = Yoga.Node.create()
 
     // Create space between title and description.
-    titleNode.setPadding(Yoga.EDGE_BOTTOM, 296 * 0.74)
+    // titleNode.setPadding(Yoga.EDGE_BOTTOM, 296 * 0.74)
 
     // Arrange title and description in the center of the canvas.
-    makeLayout(coreCanvas, { title: titleNode, description: descriptionNode })
+    // makeLayout(coreCanvas, { title: titleNode, description: descriptionNode })
 
     // Draw title and description.
     // @todo - Handle these things better.
-    coreCanvasContext.fillStyle = text.titleColor ?? '#ffffff'
-    coreCanvasContext.font = 'bold 296px "GeistBold"'
-    coreCanvasContext.fillText(
-        title,
-        titleNode.getComputedLeft(),
-        titleNode.getComputedTop(),
-    )
+    // coreCanvasContext.fillStyle = text.titleColor ?? '#ffffff'
+    // coreCanvasContext.font = 'bold 296px "GeistBold"'
+    // coreCanvasContext.fillText(
+    //     title,
+    //     titleNode.getComputedLeft(),
+    //     titleNode.getComputedTop(),
+    // )
 
-    coreCanvasContext.fillStyle = text.descriptionColor ?? '#ffffff'
-    coreCanvasContext.font = 'medium 100px "GeistMedium"'
-    coreCanvasContext.fillText(
-        description,
-        descriptionNode.getComputedLeft(),
-        descriptionNode.getComputedTop(),
-    )
+    // coreCanvasContext.fillStyle = text.descriptionColor ?? '#ffffff'
+    // coreCanvasContext.font = 'medium 100px "GeistMedium"'
+    // coreCanvasContext.fillText(
+    //     description,
+    //     descriptionNode.getComputedLeft(),
+    //     descriptionNode.getComputedTop(),
+    // )
 
     if (roundedCorners) {
         const [roundedBannerCanvas, roundedBannerContext] = makeBannerRounded(
