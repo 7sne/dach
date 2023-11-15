@@ -22,5 +22,5 @@ export function visualRegression(
     })
 
     if (numDiffPixels > threshold)
-        return new Error('Visual regression test failed. Differences found.')
+        return new Error(`Differences found, ${numDiffPixels} pixels do not match.`)
 }
