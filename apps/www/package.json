@@ -29,7 +29,7 @@
         "format": "prettier src/**/*.ts test/**/*.ts",
         "format:fix": "prettier --write src/**/*.ts test/**/*.ts",
         "typecheck": "tsc --noEmit",
-        "test:e2e": "wait-on http://localhost:3000 && cypress run"
+        "test:e2e": "cypress run"
     },
     "dependencies": {
         "@dach/shared": "workspace:*",
