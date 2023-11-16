@@ -53,7 +53,12 @@ jobs:
                   node-version: ${{ matrix.node }}
                   cache: "pnpm"
 
-            - run: pnpm install cypress --filter www
+            - name: Cache Cypress Binary
+              uses: actions/cache@v2
+              with:
+                  path: |
+                      ~/.cache/Cypress
+                  key: cypress-${{ runner.os }}-${{ hashFiles('**/pnpm-lock.yaml') }}
 
             - run: pnpm install --frozen-lockfile
             - run: cd apps/www && pnpm test:e2e
