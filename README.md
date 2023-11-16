@@ -3,21 +3,27 @@
 **Dach**: Democratizing the creation of elegant banners for everyone's project.
 
 > **Note**
-> This project is currently in its early stages of development, and there may be instances where it is either not functioning as intended or experiencing issues. Your feedback, as well as any identified issues or contributions, would be greatly appreciated in shaping its future progress. Thank you for your understanding and support! ♥️
+> This project is currently in its early stages of development, and there may be instances where it is either not functioning as intended or experiencing issues. Your feedback, as well as any identified issues or contributions, would be greatly appreciated in shaping its future progress. I still consider myself a beginner in software development, so I would greatly appreciate your understanding. ♥️
 
 ## Overview
 
 ### Features
 
+- Generate banners using a wide variety of predefined themes.
+- Create and add new themes via the [web toolkit](https://www.dach.kukielka.xyz).
+- And much incoming!
+
 ### Description
 
 Dach is a command-line tool that you most probably will use only once per project.
-It's power comes from a fact that you can create themes with [Dach website](https://dach.kukielka.xyz) for it and then use them for your personal projects or organization's projects, and so on. Currently the amount of customization is limited and opinionsated, but it will most probably slightly
+Its power comes from the fact that you can create themes with  for it and then use them for your personal projects or organization's projects, and so on. Currently, the amount of customization is limited and opinionated, but it will most probably slightly
 change in the future as the project evolves.
+
+Dach is a command-line tool that you will most likely use only once per project. Its strength lies in the ability to create themes for it using the [web toolkit](https://dach.kukielka.xyz). You can then apply these themes to your personal or organizational projects. Currently, customization options are somewhat limited and opinionated, but they will likely undergo slight changes in the future as the project evolves.
 
 ### Usage
 
-To generate default banner, simply run `dach generate` in your project's directory.
+To generate a default banner, simply run `dach generate` in your project's directory.
 
 #### Banner using predefined theme and rounded corners:
 
@@ -42,14 +48,12 @@ dach generate    \
 #### Banner with custom dimensions:
 
 ```bash
-dach generate    \
-  --theme elegant \
-  --title "Output" \
-  --description "Custom output directory" \
+dach generate \
+  --theme funk \
+  --title "Hello" \
+  --description "Worlds" \
   --dimensions "1920x1200"
 ```
-
-#### Banner with custom theme
 
 ## Commands
 
@@ -84,18 +88,6 @@ Generates a banner using provided arguments.
         <td><code>Project description</code></td>
     </tr>
     <tr>
-        <td><code>--dimensions</code></td>
-        <td><code>-dim</code></td>
-        <td>Dimensions of banner.</td>
-        <td><code>3000x1685</code></td>
-    </tr>
-    <tr>
-        <td><code>--ratio</code></td>
-        <td><code>-r</code></td>
-        <td>Width to height ratio of banner.</td>
-        <td><code>16:9</code></td>
-    </tr>
-      <tr>
         <td><code>--rounded-corners</code></td>
         <td><code>-rc</code></td>
         <td>Rounded corners.</td>
@@ -144,6 +136,18 @@ Generates a banner using provided arguments.
         <td>Color of the description.</td>
         <td><code>-</code></td>
     </tr>
+    <tr>
+        <td><code>--dimensions</code></td>
+        <td><code>-dim</code></td>
+        <td>Dimensions of banner.</td>
+        <td><code>3000x1685</code></td>
+    </tr>
+    <tr>
+        <td><code>--ratio</code></td>
+        <td><code>-r</code></td>
+        <td>Width to height ratio of banner.</td>
+        <td><code>16:9</code></td>
+    </tr>
 </table>
 
 ## Example banners
@@ -154,11 +158,16 @@ Generates a banner using provided arguments.
 
 ![Funk](.github/example-banners/funk.png)
 
-## Requirements
-
 ## Installation
 
+Install dependencies.
+```bash
+  pnpm install
+```
+
 ## Contributing
+
+All contributions are much appreciated. Guidelines TBD.
 
 ## License
 
