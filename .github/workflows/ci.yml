@@ -57,7 +57,6 @@ jobs:
             - name: Run E2E tests
               uses: cypress-io/github-action@v6
               with:
-                  working-directory: apps/www
                   project: apps/www
                   browser: chrome
                   build: pnpm build
