@@ -12,7 +12,7 @@ describe('Generate banner.', () => {
         cy.get('.rcp-saturation').click('topRight')
 
         cy.get('#hex').should('have.value', '#ff0193')
-        cy.get('#rgb').should('have.value', '255, 1, 150')
+        cy.get('#rgb').should('have.value', '255, 1, 147')
         cy.get('#hsv').should('have.value', '325°, 100%, 100%')
 
         cy.get('[data-cy="banner-pick-color-empty-slot"]').click()
