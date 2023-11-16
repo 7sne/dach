@@ -55,5 +55,4 @@ jobs:
                   cache: "pnpm"
 
             - run: pnpm install --prefer-offline --frozen-lockfile --prod
-
-            - run: cd apps/www && npx cypress run --headed --browser chrome --spec 'cypress/e2e/**'
+            - run: cd apps/www && cypress run --headed --browser chrome --spec 'cypress/e2e/**'
