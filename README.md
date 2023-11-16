@@ -1,57 +1,71 @@
-> **Note**
-> This project is currently in its early stages of development, and there may be instances where it is either not functioning as intended or experiencing issues. Your feedback, as well as any identified issues or contributions, would be greatly appreciated in shaping its future progress. Thank you for your understanding  and support.
-
 ![Satori](.github/card.png)
 
 **Dach**: Democratizing the creation of elegant banners for everyone's project.
 
+> **Note**
+> This project is currently in its early stages of development, and there may be instances where it is either not functioning as intended or experiencing issues. Your feedback, as well as any identified issues or contributions, would be greatly appreciated in shaping its future progress. Thank you for your understanding and support! ♥️
+
 ## Overview
+
+### Features
+
+-   Universal - Picks the right package manager and runtime based on the lockfile. npm, bun, pnpm, yarn - we got you covered!
+-   Versatile - Handles the basics like installing all your dependencies, adding new packages, and kicking off scripts.
+-   Speedy - Crafted in Rust to give you a quick ride. When running scripts, it's actually faster than using PMs directly!
+-   TypeScript-Ready - Adding a new dependency? Don't worry! It'll fetch any missing @types packages for you if needed.
 
 ### Description
 
 Dach is a command-line tool that you most probably will use only once per project.
-You can either pass it arguments or create a configuration file. The decision to throw
-another configuration file into your project's dotfiles is up to you.
+It's power comes from a fact that you can create themes with [Dach website](https://dach.kukielka.xyz) for it and then use them for your personal projects or organization's projects, and so on. Currently the amount of customization is limited and opinionsated, but it will most probably slightly
+change in the future as the project evolves.
 
-Usage of more advanced options is only possible through the configuration file.
+### Usage
 
-### Example usage
+To generate default banner, simply run `dach generate` in your project's directory.
 
-Simple banner:
-
-```bash
-dach
-  --title "My Awesome Project"
-  --description "This is my awesome project"
-  --output ".github/banner.png"
-```
-
-Banner using config file:
+#### Banner using predefined theme and rounded corners:
 
 ```bash
-dach
-  --title "My Awesome Project"
-  --description "This is my awesome project"
-  --output ".github/banner.png"
+dach generate  \
+  --theme funk  \
+  --title "Funk" \
+  --description "Example description"
+  --rounded-corners
 ```
 
-Banner using gradient presets:
+#### Banner with custom output directory:
 
 ```bash
-dach
-  --title "My Awesome Project"
-  --description "This is my awesome project"
-  --output ".github/banner.png"
+dach generate    \
+  --theme elegant \
+  --title "Output" \
+  --description "Custom output directory" \
+  --output "./banners"
 ```
 
-> **Note**
-> You can find example config files in the `test/fixtures` directory.
+#### Banner with custom dimensions:
 
-## Arguments
+```bash
+dach generate    \
+  --theme elegant \
+  --title "Output" \
+  --description "Custom output directory" \
+  --dimensions "1920x1200"
+```
+
+#### Banner with custom theme
+
+## Commands
+
+### Generate
+
+`dach generate`,
+Generates a banner using provided arguments.
 
 <table>
     <tr>
-        <th>Argument</th>
+        <th>Option</th>
         <th>Alias</th>
         <th>Description</th>
         <th>Default</th>
@@ -59,61 +73,98 @@ dach
     <tr>
         <td><code>--output</code></td>
         <td><code>-o</code></td>
-        <td>Output directory</td>
-        <td><code>[cwd]/.github</code></td>
+        <td>Path to output directory.</td>
+        <td><code>CWD/.github</code></td>
     </tr>
     <tr>
         <td><code>--title</code></td>
         <td><code>-t</code></td>
-        <td>The title of your project.</td>
+        <td>Banner title.</td>
         <td><code>Untitled</code></td>
     </tr>
     <tr>
         <td><code>--description</code></td>
         <td><code>-d</code></td>
-        <td>Project description</td>
+        <td>Banner description.</td>
         <td><code>Project description</code></td>
-    </tr>
-    <tr>
-        <td><code>--description-color</code></td>
-        <td><code>-d</code></td>
-        <td>Color of the description text</td>
-        <td><code>#FFFFFF</code></td>
     </tr>
     <tr>
         <td><code>--dimensions</code></td>
         <td><code>-dim</code></td>
-        <td>Dimensions of the banner.</td>
-        <td><code>4000x1600</code></td>
+        <td>Dimensions of banner.</td>
+        <td><code>3000x1685</code></td>
+    </tr>
+    <tr>
+        <td><code>--ratio</code></td>
+        <td><code>-r</code></td>
+        <td>Width to height ratio of banner.</td>
+        <td><code>16:9</code></td>
     </tr>
       <tr>
         <td><code>--rounded-corners</code></td>
-        <td><code>-r</code></td>
+        <td><code>-rc</code></td>
         <td>Rounded corners.</td>
         <td><code>false</code></td>
     </tr>
     <tr>
         <td><code>--theme</code></td>
         <td><code>-</code></td>
-        <td>Theme of the banner.</td>
+        <td>Theme of banner.</td>
         <td><code>elegant</code></td>
     </tr>
-
 </table>
 
-> **Note**
-> When `--background-type` is set to `gradient`, `--gradient-positions-preset` and
-> `--gradient-colors-preset` are mandatory. When `--background-type` is set to `plain`,
-> `--background-color` is mandatory.
+### Add
+
+`dach add <name>`, Adds a new theme to the list of available themes.
+
+<table>
+    <tr>
+        <th>Option</th>
+        <th>Alias</th>
+        <th>Description</th>
+        <th>Default</th>
+    </tr>
+    <tr>
+        <td><code>--colors</code></td>
+        <td><code>-c</code></td>
+        <td>Colors of theme.</td>
+        <td><code>-</code></td>
+    </tr>
+    <tr>
+        <td><code>--positions</code></td>
+        <td><code>-p</code></td>
+        <td>Position coordinates for each color.</td>
+        <td><code>-</code></td>
+    </tr>
+    <tr>
+        <td><code>--title-color</code></td>
+        <td><code>-t</code></td>
+        <td>Color of title.</td>
+        <td><code>-</code></td>
+    </tr>
+    <tr>
+        <td><code>--description-color</code></td>
+        <td><code>-d</code></td>
+        <td>Color of the description.</td>
+        <td><code>-</code></td>
+    </tr>
+</table>
 
 ## Example banners
 
 ![Blaze](.github/example-banners/blaze.png)
+
 ![Flora](.github/example-banners/flora.png)
+
 ![Funk](.github/example-banners/funk.png)
+
+## Requirements
 
 ## Installation
 
 ## Contributing
 
 ## License
+
+[Maciej Kukielka](https://twitter.com/KukielkaMaciej) | MIT License

@@ -1,0 +1,81 @@
+{
+    "name": "@dach/www",
+    "version": "1.0.0",
+    "description": "Command line interface for Dach",
+    "author": "Maciej Kukielka <matthiaskukielka@gmail.com>",
+    "keywords": [
+        "banner",
+        "generator",
+        "theme",
+        "cli",
+        "art",
+        "readme",
+        "tool"
+    ],
+    "license": "MIT",
+    "homepage": "https://dach.kukielka.xyz",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/7sne/dach.git"
+    },
+    "bugs": {
+        "url": "https://github.com/7sne/dach/issues"
+    },
+    "scripts": {
+        "dev": "next dev",
+        "start": "next start",
+        "build": "next build",
+        "lint": "next lint",
+        "format": "prettier src/**/*.ts test/**/*.ts",
+        "format:fix": "prettier --write src/**/*.ts test/**/*.ts",
+        "typecheck": "tsc --noEmit",
+        "test:e2e": "pnpm start & wait-on http://localhost:3000 & cypress run --headed --browser chrome --spec 'cypress/e2e/**'"
+    },
+    "dependencies": {
+        "@dach/shared": "workspace:*",
+        "@radix-ui/react-dropdown-menu": "^2.0.6",
+        "@radix-ui/react-slot": "^1.0.2",
+        "class-variance-authority": "^0.7.0",
+        "clsx": "^2.0.0",
+        "framer-motion": "^10.16.4",
+        "geist": "^1.0.0",
+        "lodash.debounce": "^4.0.8",
+        "lucide-react": "^0.291.0",
+        "next": "14.0.1",
+        "next-themes": "^0.2.1",
+        "react": "^18",
+        "react-color-palette": "^7.1.0",
+        "react-dom": "^18",
+        "tailwind-merge": "^2.0.0",
+        "tailwindcss-animate": "^1.0.7",
+        "wait-on": "^7.2.0",
+        "zustand": "^4.4.5"
+    },
+    "devDependencies": {
+        "@testing-library/jest-dom": "^6.1.4",
+        "@testing-library/react": "^14.1.0",
+        "@types/jest": "^29.5.8",
+        "@types/lodash.debounce": "^4.0.9",
+        "@types/mocha": "^10.0.4",
+        "@types/node": "^20.4.8",
+        "@types/react": "^18",
+        "@types/react-dom": "^18",
+        "@vitejs/plugin-react": "^4.1.1",
+        "cypress-image-diff-js": "^1.32.0",
+        "cypress-image-snapshot": "^4.0.1",
+        "autoprefixer": "^10.0.1",
+        "cypress": "^13.5.0",
+        "cypress-real-events": "^1.11.0",
+        "cypress-recurse": "^1.35.2",
+        "eslint": "^8.0.0",
+        "eslint-config-next": "14.0.1",
+        "eslint-plugin-cypress": "^2.15.1",
+        "jsdom": "^22.1.0",
+        "postcss": "^8",
+        "prettier": "^3.0.3",
+        "tailwindcss": "^3.3.0",
+        "typescript": "^5",
+        "vitest": "^0.34.4"
+    },
+    "packageManager": "pnpm@8.6.7"
+}
