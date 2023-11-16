@@ -11,9 +11,9 @@ describe('Generate banner.', () => {
         cy.get('.rcp-hue').click(240, 0)
         cy.get('.rcp-saturation').click('topRight')
 
-        // cy.get('#hex').should('have.value', '#ff0196')
-        // cy.get('#rgb').should('have.value', '255, 1, 150')
-        // cy.get('#hsv').should('have.value', '325°, 100%, 100%')
+        cy.get('#hex').should('have.value', '#ff0193')
+        cy.get('#rgb').should('have.value', '255, 1, 150')
+        cy.get('#hsv').should('have.value', '325°, 100%, 100%')
 
         cy.get('[data-cy="banner-pick-color-empty-slot"]').click()
         cy.get('[data-cy="banner-pick-color-1"] > [data-cy="tile"]').click()
@@ -28,8 +28,8 @@ describe('Generate banner.', () => {
         cy.get('#hex').type('000000')
         cy.get('body').click(0, 0)
 
-        // cy.get('[data-cy="banner-pick-color-empty-slot"]').should('not.exist')
-        // cy.get('[data-cy^="banner-pick-color"]').should('have.length', 4)
+        cy.get('[data-cy="banner-pick-color-empty-slot"]').should('not.exist')
+        cy.get('[data-cy^="banner-pick-color"]').should('have.length', 4)
 
         cy.get('[data-cy="title-pick-color"] > [data-cy="tile"]').click()
         cy.get('#hsv').clear()
@@ -80,8 +80,8 @@ describe('Generate banner.', () => {
 
         cy.get('[data-cy="tab-controls"]').click()
 
-        // cy.get('[data-cy="banner-title-text"]').should('not.exist')
-        // cy.get('[data-cy="banner-description-text"]').should('not.exist')
+        cy.get('[data-cy="banner-title-text"]').should('not.exist')
+        cy.get('[data-cy="banner-description-text"]').should('not.exist')
 
         cy.get('[data-cy="banner-canvas"]')
             .realHover()
@@ -91,21 +91,21 @@ describe('Generate banner.', () => {
         cy.get('[data-cy="tab-text"]').click()
         cy.get('[data-cy="banner-ratio-tab-2:1"]').click()
 
-        // cy.get('[data-cy="banner-canvas"]').should(
-        //     'have.css',
-        //     'height',
-        //     '287px',
-        // )
+        cy.get('[data-cy="banner-canvas"]').should(
+            'have.css',
+            'height',
+            '287px',
+        )
 
         cy.get('[data-cy="banner-canvas-resize-handle-horizontal"]')
             .realMouseDown()
             .realMouseMove(50, 0, { position: 'center' })
             .realMouseUp()
 
-        // cy.get('[data-cy="banner-canvas"]').should('have.css', 'width', '621px')
+        cy.get('[data-cy="banner-canvas"]').should('have.css', 'width', '621px')
 
         // Perform visual regression test on the generated banner.
         cy.get('[data-cy="banner-canvas"]').screenshot()
-        cy.get('[data-cy="banner-canvas"]').compareSnapshot('e2e', 0.3)
+        cy.get('[data-cy="banner-canvas"]').compareSnapshot('e2e', 0.2)
     })
 })
