@@ -56,11 +56,4 @@ jobs:
 
             - run: pnpm install --prefer-offline --frozen-lockfile --prod
 
-            - name: Run E2E tests
-              uses: cypress-io/github-action@v6
-              with:
-                  working-directory: apps/www
-                  browser: chrome
-                  build: pnpm build
-                  start: pnpm start
-                  wait-on: "http://localhost:3000"
+            - run: cd apps/www && npx cypress run --headed --browser chrome --spec 'cypress/e2e/**'

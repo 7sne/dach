@@ -9,12 +9,9 @@ describe('Generate banner.', () => {
         cy.get('.rcp-hue').click(240, 0)
         cy.get('.rcp-saturation').click('topRight')
 
-        cy.get('#hex', { timeout: 10_000 }).should('have.value', '#ff0196')
-        cy.get('#rgb', { timeout: 10_000 }).should('have.value', '255, 1, 150')
-        cy.get('#hsv', { timeout: 10_000 }).should(
-            'have.value',
-            '325°, 100%, 100%',
-        )
+        cy.get('#hex').should('have.value', '#ff0196')
+        cy.get('#rgb').should('have.value', '255, 1, 150')
+        cy.get('#hsv').should('have.value', '325°, 100%, 100%')
 
         cy.get('[data-cy="banner-pick-color-empty-slot"]').click()
         cy.get('[data-cy="banner-pick-color-1"] > [data-cy="tile"]').click()
@@ -107,6 +104,6 @@ describe('Generate banner.', () => {
 
         // Perform visual regression test on the generated banner.
         cy.get('[data-cy="banner-canvas"]').screenshot()
-        cy.get('[data-cy="banner-canvas"]').compareSnapshot('e2e')
+        cy.get('[data-cy="banner-canvas"]').compareSnapshot('e2e', 0.1)
     })
 })

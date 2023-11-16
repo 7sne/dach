@@ -37,4 +37,6 @@ apps/www/cypress-visual-screenshots/diff/*
 apps/www/cypress-visual-report
 apps/cli/coverage
 apps/cli/*.png
+/Users/7sne1/Documents/js/dach/apps/www/cypress-visual-screenshots/comparison
+/Users/7sne1/Documents/js/dach/apps/www/cypress-visual-screenshots/diff
 
