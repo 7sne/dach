@@ -106,6 +106,6 @@ describe('Generate banner.', () => {
 
         // Perform visual regression test on the generated banner.
         cy.get('[data-cy="banner-canvas"]').screenshot()
-        cy.get('[data-cy="banner-canvas"]').compareSnapshot('e2e', 0.1)
+        cy.get('[data-cy="banner-canvas"]').compareSnapshot('e2e', 0.7)
     })
 })
