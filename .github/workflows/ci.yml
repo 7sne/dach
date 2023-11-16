@@ -54,4 +54,4 @@ jobs:
                   cache: "pnpm"
 
             - run: pnpm install --frozen-lockfile
-            - run: cd apps/www && cypress run --headed --browser chrome --spec 'cypress/e2e/**'
+            - run: cd apps/www && pnpm test:e2e
