@@ -53,4 +53,12 @@ jobs:
                   node-version: ${{ matrix.node }}
 
             - run: pnpm install --frozen-lockfile
-            - run: cd apps/www && pnpm test:e2e
+
+            - name: Run E2E tests
+              uses: cypress-io/github-action@v6
+              with:
+                  working-directory: apps/www
+                  browser: chrome
+                  build: pnpm build
+                  start: pnpm start
+                  wait-on: "http://localhost:3000"
