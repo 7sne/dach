@@ -162,7 +162,7 @@ Generates a banner using provided arguments.
 
 Install dependencies.
 ```bash
-  pnpm install
+  npm i -g dach
 ```
 
 ## Contributing
