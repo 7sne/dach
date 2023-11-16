@@ -27,7 +27,6 @@ jobs:
                   cache: "pnpm"
 
             - run: pnpm install --prefer-offline --frozen-lockfile --prod
-            - run: pnpm install turbo -w
 
             - run: pnpm build
             - run: pnpm typecheck
