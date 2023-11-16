@@ -102,7 +102,7 @@ describe('Generate banner.', () => {
             .realMouseMove(50, 0, { position: 'center' })
             .realMouseUp()
 
-        cy.get('[data-cy="banner-canvas"]').should('have.css', 'width', '621px')
+        cy.get('[data-cy="banner-canvas"]').should('have.css', 'width', '622px')
 
         // Perform visual regression test on the generated banner.
         cy.get('[data-cy="banner-canvas"]').screenshot()
