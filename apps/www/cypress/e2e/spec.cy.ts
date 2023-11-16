@@ -5,6 +5,8 @@ describe('Generate banner.', () => {
     it('Generates banner.', { scrollBehavior: false }, () => {
         cy.visit('http://localhost:3000')
 
+        cy.viewport(1280, 720)
+
         cy.get('[data-cy="banner-pick-color-0"] > [data-cy="tile"]').click()
         cy.get('.rcp-hue').click(240, 0)
         cy.get('.rcp-saturation').click('topRight')

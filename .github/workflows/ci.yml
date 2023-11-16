@@ -56,13 +56,3 @@ jobs:
             - run: pnpm build
 
             - run: cd apps/www && pnpm test:e2e
-
-            # - name: Run E2E tests
-            #   uses: cypress-io/github-action@v6
-            #   with:
-            #       headed: true
-            #       working-directory: apps/www
-            #       browser: chrome
-            #       build: pnpm build
-            #       start: pnpm start
-            #       wait-on: "http://localhost:3000"
