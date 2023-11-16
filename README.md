@@ -9,11 +9,6 @@
 
 ### Features
 
--   Universal - Picks the right package manager and runtime based on the lockfile. npm, bun, pnpm, yarn - we got you covered!
--   Versatile - Handles the basics like installing all your dependencies, adding new packages, and kicking off scripts.
--   Speedy - Crafted in Rust to give you a quick ride. When running scripts, it's actually faster than using PMs directly!
--   TypeScript-Ready - Adding a new dependency? Don't worry! It'll fetch any missing @types packages for you if needed.
-
 ### Description
 
 Dach is a command-line tool that you most probably will use only once per project.
