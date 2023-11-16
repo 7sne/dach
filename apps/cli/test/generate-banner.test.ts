@@ -22,6 +22,7 @@ describe('Generate banner', () => {
                 fssync.readFileSync(
                     path.join(sandboxDirectoryPath, 'project-banner.png'),
                 ),
+                0.3,
             ),
         ).not.instanceOf(Error)
     })

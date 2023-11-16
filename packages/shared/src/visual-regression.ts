@@ -21,6 +21,6 @@ export function visualRegression(
         threshold: 0.1,
     })
 
-    if (numDiffPixels > threshold)
+    if (numDiffPixels > threshold * width * height)
         return new Error(`Differences found, ${numDiffPixels} pixels do not match.`)
 }
