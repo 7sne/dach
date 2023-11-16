@@ -31,7 +31,7 @@ To generate a default banner, simply run `dach generate` in your project's direc
 dach generate  \
   --theme funk  \
   --title "Funk" \
-  --description "Example description"
+  --description "Example description" \
   --rounded-corners
 ```
 
