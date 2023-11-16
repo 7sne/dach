@@ -42,34 +42,12 @@ describe('Generate banner.', () => {
         cy.get('[data-cy="banner-title-text"]').type(
             'Hello everyone, this title is way to long to fit in.',
         )
-        // cy.get('[data-cy="banner-title-text"]')
-        //     .invoke('text')
-        //     .then(actualText => {
-        //         const trimmedActualText = actualText.trim()
-        //         cy.wrap(trimmedActualText).should(
-        //             'equal',
-        //             'Hello everyone, this',
-        //         )
-        //     })
 
         // Editable Text relies on the contenteditable attribute, which makes cypress
         // not able to invoke clear like it does with native input elements.
         cy.get('[data-cy="banner-title-text"]').type('{selectall}{backspace}')
         cy.get('[data-cy="banner-title-text"]').type('Better Title.')
         cy.get('[data-cy="banner-description-text"]').clear()
-        // cy.get('[data-cy="banner-description-text"]').type(
-        //     'That is going to be a way longer description than it should be, so we can test the limit validation!',
-        // )
-
-        cy.get('[data-cy="banner-description-text"]')
-            .invoke('text')
-            .then(actualText => {
-                const trimmedActualText = actualText.trim()
-                // cy.wrap(trimmedActualText).should(
-                //     'equal',
-                //     'That is going to be a way longer desc',
-                // )
-            })
 
         cy.get('[data-cy="banner-description-text"]').type(
             '{selectall}{backspace}',
@@ -88,6 +66,7 @@ describe('Generate banner.', () => {
             .realMouseDown({ x: 10, y: 10 })
             .realMouseMove(300, 150)
             .realMouseUp()
+
         cy.get('[data-cy="tab-text"]').click()
         cy.get('[data-cy="banner-ratio-tab-2:1"]').click()
 
