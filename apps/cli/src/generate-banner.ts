@@ -90,25 +90,26 @@ export function generateBanner({
 
 function convertThemeToTextConfig(theme: string): TextConfig {
     switch (theme) {
+        case 'funk':
         case 'blaze':
+        case 'night':
+        case 'elegant':
             return {
                 titleColor: '#f5f5f5',
                 descriptionColor: '#f5f5f5',
             }
         case 'flora':
+        case 'lotus':
+        case 'pearl':
+        case 'sunny':
+        case 'steel':
+        case 'pastel':
+        case 'spring':
+        case 'gold':
+        case 'peach':
             return {
                 titleColor: '#050505',
                 descriptionColor: '#050505',
-            }
-        case 'funk':
-            return {
-                titleColor: '#f5f5f5',
-                descriptionColor: '#f5f5f5',
-            }
-        case 'elegant':
-            return {
-                titleColor: '#f5f5f5',
-                descriptionColor: '#f5f5f5',
             }
         default:
             return {
@@ -125,7 +126,7 @@ function convertThemeToBackgroundConfig(theme: string): BackgroundConfig {
                 type: 'gradient',
                 background: {
                     colorsPreset: 'blaze',
-                    positionsPreset: 14,
+                    positionsPreset: 22,
                 },
             }
         case 'flora':
@@ -141,22 +142,79 @@ function convertThemeToBackgroundConfig(theme: string): BackgroundConfig {
                 type: 'gradient',
                 background: {
                     colorsPreset: 'funk',
-                    positionsPreset: 20,
+                    positionsPreset: 12,
                 },
             }
-        case 'orange':
+        case 'gold':
             return {
                 type: 'gradient',
                 background: {
-                    colorsPreset: 'orange',
+                    colorsPreset: 'gold',
                     positionsPreset: 4,
                 },
             }
         case 'elegant':
             return {
-                type: 'plain',
+                type: 'gradient',
                 background: {
-                    color: '#080808',
+                    colorsPreset: 'elegant',
+                    positionsPreset: 19,
+                },
+            }
+        case 'lotus':
+            return {
+                type: 'gradient',
+                background: {
+                    colorsPreset: 'lotus',
+                    positionsPreset: 19,
+                },
+            }
+        case 'sunny':
+            return {
+                type: 'gradient',
+                background: {
+                    colorsPreset: 'sunny',
+                    positionsPreset: 12,
+                },
+            }
+        case 'night':
+            return {
+                type: 'gradient',
+                background: {
+                    colorsPreset: 'night',
+                    positionsPreset: 12,
+                },
+            }
+        case 'pearl':
+            return {
+                type: 'gradient',
+                background: {
+                    colorsPreset: 'pearl',
+                    positionsPreset: 1,
+                },
+            }
+        case 'pastel':
+            return {
+                type: 'gradient',
+                background: {
+                    colorsPreset: 'pastel',
+                    positionsPreset: 38,
+                },
+            }
+        case 'steel':
+            return {
+                type: 'gradient',
+                background: {
+                    colorsPreset: 'steel',
+                    positionsPreset: 38,
+                },
+            }
+        case 'peach':
+            return {
+                type: 'gradient',
+                background: {
+                    colorsPreset: 'peach',
+                    positionsPreset: 14,
                 },
             }
         default:
