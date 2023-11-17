@@ -1,4 +1,5 @@
 import { describe, expect, test, vi } from 'vitest'
+
 import { logger } from '../logger'
 import { themeStore } from '../theme-store'
 import { handleAddCmd } from './add'

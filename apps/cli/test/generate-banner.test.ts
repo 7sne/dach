@@ -1,9 +1,10 @@
-import * as fs from 'node:fs/promises'
 import * as fssync from 'node:fs'
+import * as fs from 'node:fs/promises'
 import path from 'node:path'
+
+import { visualRegression } from '@dach/shared'
 import { execa, execaCommand } from 'execa'
 import { describe } from 'vitest'
-import { visualRegression } from '@dach/shared'
 
 const sandboxDirectoryPath = `${process.cwd()}/test/sandbox`
 const baselineDirectoryPath = `${process.cwd()}/test/baseline`

@@ -1,15 +1,16 @@
 import { HTMLAttributes, ReactElement, ReactNode } from 'react'
+
 import { cn } from '../lib/utils'
 
-function GeneratedCliCommandContainer({
+function CommandContainer({
     children,
     ...rest
-}: GeneratedCliCommandContainerProps): ReactElement | null {
+}: CommandContainerProps): ReactElement | null {
     return children.length > 1 ? (
         <div
             {...rest}
             className={cn(
-                `relative flex items-center justify-between w-full py-6 mx-auto border-b border-x border-secondary ${rest.className}}`,
+                `relative flex items-center justify-between w-full py-6 mx-auto border-b border-x border-secondary cursor-copy ${rest.className}}`,
             )}
         >
             <code className="font-mono px-2 mr-24 text-md overflow-hidden whitespace-nowrap w-[1024px] text-ellipsis">
@@ -22,7 +23,7 @@ function GeneratedCliCommandContainer({
     ) : null
 }
 
-type GeneratedCliCommandContainerProps = {
+type CommandContainerProps = {
     children: ReactElement[]
 } & HTMLAttributes<HTMLDivElement>
 
@@ -38,6 +39,6 @@ type TextProps = {
     children: ReactElement | ReactNode | ReactElement[]
 }
 
-export const GeneratedCliCommand = Object.assign(GeneratedCliCommandContainer, {
+export const Command = Object.assign(CommandContainer, {
     Text,
 })

@@ -2,12 +2,26 @@ module.exports = {
     root: true,
     parser: '@typescript-eslint/parser',
     plugins: ['no-only-tests', 'simple-import-sort', 'unused-imports'],
-    extends: 'typestrict',
+    extends: [
+        'next/core-web-vitals',
+        'eslint:recommended',
+        'plugin:cypress/recommended',
+        'typestrict',
+    ],
     parserOptions: {
         ecmaVersion: 'latest',
         sourceType: 'module',
         project: 'tsconfig.json',
         tsconfigRootDir: __dirname,
+        babelOptions: {
+            presets: [require.resolve('next/babel')],
+        },
+    },
+    env: {
+        browser: true,
+        es2021: true,
+        node: true,
+        'cypress/globals': true,
     },
     rules: {
         indent: 'off',
@@ -28,10 +42,4 @@ module.exports = {
             },
         ],
     },
-    ignorePatterns: [
-        '**/*.d.ts',
-        '**/dist/**',
-        '**/node_modules/**',
-        '**/coverage/**',
-    ],
 }

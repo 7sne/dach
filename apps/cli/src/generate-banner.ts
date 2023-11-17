@@ -1,16 +1,17 @@
 import * as path from 'node:path'
+
+import { gradientImageData, hexCodesToRgb } from '@dach/shared'
 import * as canvas from 'canvas'
 import * as Yoga from 'yoga-layout-prebuilt'
 
-import { gradientImageData, hexCodesToRgb } from '@dach/shared'
+import { colorPresetToColors } from './presets/color-presets'
+import { positionPresetToPositions } from './presets/position-presets'
 import type {
     BackgroundConfig,
     BannerSettings,
     TextConfig,
 } from './schema/schema'
 import { themeSchema } from './schema/schema'
-import { colorPresetToColors } from './presets/color-presets'
-import { positionPresetToPositions } from './presets/position-presets'
 import { themeStore } from './theme-store'
 
 export function generateBanner({
@@ -60,7 +61,7 @@ export function generateBanner({
 
     // Draw title and description.
     // @todo - Handle these things better.
-    coreCanvasContext.fillStyle = text.titleColor ?? '#ffffff'
+    coreCanvasContext.fillStyle = text.titleColor
     coreCanvasContext.font = 'bold 296px "GeistBold"'
     coreCanvasContext.fillText(
         title,
@@ -68,7 +69,7 @@ export function generateBanner({
         titleNode.getComputedTop(),
     )
 
-    coreCanvasContext.fillStyle = text.descriptionColor ?? '#ffffff'
+    coreCanvasContext.fillStyle = text.descriptionColor
     coreCanvasContext.font = 'medium 100px "GeistMedium"'
     coreCanvasContext.fillText(
         description,
@@ -90,26 +91,14 @@ export function generateBanner({
 
 function convertThemeToTextConfig(theme: string): TextConfig {
     switch (theme) {
-        case 'blaze':
-            return {
-                titleColor: '#f5f5f5',
-                descriptionColor: '#f5f5f5',
-            }
         case 'flora':
             return {
                 titleColor: '#050505',
                 descriptionColor: '#050505',
             }
+        case 'blaze':
         case 'funk':
-            return {
-                titleColor: '#f5f5f5',
-                descriptionColor: '#f5f5f5',
-            }
         case 'elegant':
-            return {
-                titleColor: '#f5f5f5',
-                descriptionColor: '#f5f5f5',
-            }
         default:
             return {
                 titleColor: '#f5f5f5',
@@ -153,12 +142,6 @@ function convertThemeToBackgroundConfig(theme: string): BackgroundConfig {
                 },
             }
         case 'elegant':
-            return {
-                type: 'plain',
-                background: {
-                    color: '#080808',
-                },
-            }
         default:
             return {
                 type: 'plain',
@@ -184,7 +167,7 @@ function createBackgroundFromUserTheme(
 
     const customThemeConfig = themeStore
         .get('dach-themes')
-        .themes.find((t: { name: string }) => t.name === theme)
+        .themes?.find(({ name }) => name === theme)
 
     if (!customThemeConfig) return new Error(`Theme ${theme} not found.`)
 
@@ -221,7 +204,7 @@ function createBackgroundFromTheme(
             colors,
             positions,
         })
-    } else if (type === 'plain') {
+    } else {
         makeBackgroundPlainColor(
             coreCanvasContext,
             dimensions,

@@ -1,9 +1,10 @@
-import { Command } from 'commander'
 import { ratioToDimensions } from '@dach/shared'
+import { Command } from 'commander'
+
 import { generateBanner } from '../generate-banner'
+import { logger } from '../logger'
 import { inConfigSchemaGenerate } from '../schema/schema-in'
 import { writeCanvasToPngFile } from '../write-canvas-to-png'
-import { logger } from '../logger'
 
 export const generate = new Command()
     .name('generate')

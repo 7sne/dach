@@ -1,7 +1,9 @@
 #!/usr/bin/env node
 
 import * as process from 'node:process'
+
 import { Command } from 'commander'
+
 import { add, generate } from './commands'
 
 async function exec(): Promise<void> {
@@ -19,4 +21,4 @@ async function exec(): Promise<void> {
 process.on('SIGINT', () => process.exit(0))
 process.on('SIGTERM', () => process.exit(0))
 
-exec()
+void exec()

@@ -63,3 +63,23 @@
   background-size: 50px 50px, 50px 50px, 10px 10px, 10px 10px;
   background-position: -2px -2px, -2px -2px, -1px -1px, -1px -1px;
 }
+
+.mesh-pattern {
+  opacity: 0.08;
+  background-image: linear-gradient(hsl(var(--primary)) 1px, transparent 1px), linear-gradient(to right, hsl(var(--primary)) 1px, transparent 1px);
+  background-size: 10px 10px;
+}
+
+[data-transform] {
+  transform:
+    rotateX(51deg)
+    rotateZ(-23deg);
+  transform-style: preserve-3d;
+}
+
+@media screen and (max-width: 1280px) {
+  [data-transform] {
+    transform: none;
+  }
+  
+}

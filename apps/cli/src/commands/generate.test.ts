@@ -1,4 +1,5 @@
 import { afterAll, describe, expect, test, vi } from 'vitest'
+
 import { logger } from '../logger'
 import { handleGenerateCmd } from './generate'
 

@@ -1,7 +1,8 @@
 import { Command } from 'commander'
-import { themeStore } from '../theme-store'
+
 import { logger } from '../logger'
 import { inConfigSchemaAdd } from '../schema/schema-in'
+import { themeStore } from '../theme-store'
 
 export const add = new Command()
     .name('add')
@@ -36,7 +37,7 @@ export function handleAddCmd(themeName: any, options: Record<string, any>) {
 
     themeStore.set('dach-themes', {
         themes: [
-            ...(themeStore.get('dach-themes')?.themes ?? []),
+            ...(themeStore.get('dach-themes').themes ?? []),
             parsedOptionsResult.data,
         ],
     })

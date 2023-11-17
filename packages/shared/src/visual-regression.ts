@@ -1,6 +1,7 @@
 import type { Buffer } from 'node:buffer'
-import { PNG } from 'pngjs'
+
 import pixelmatch from 'pixelmatch'
+import { PNG } from 'pngjs'
 
 export function visualRegression(
     baselineImageBuf: Buffer,

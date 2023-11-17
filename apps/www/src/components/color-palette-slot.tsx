@@ -1,12 +1,15 @@
-import { MotionProps, motion } from 'framer-motion'
-import { useColors } from '../store/store-colors'
-import { cn } from '../lib/utils'
+'use client'
+
+import { motion, MotionProps } from 'framer-motion'
 import { PlusIcon } from 'lucide-react'
-import tailwindConfig from '../../tailwind.config'
-import { useRgbPositions } from '../store/store-rgb-positions'
-import { DEFAULT_RGB_POSITONS } from '../lib/mesh-gradient-canvas-const'
-import { DEFAULT_COLOR_PALETTE } from '../lib/color-palette-const'
 import { HTMLAttributes, ReactElement } from 'react'
+
+import tailwindConfig from '../../tailwind.config'
+import { DEFAULT_COLOR_PALETTE } from '../lib/color-palette-const'
+import { DEFAULT_RGB_POSITONS } from '../lib/mesh-gradient-canvas-const'
+import { cn } from '../lib/utils'
+import { useColors } from '../store/store-colors'
+import { useRgbPositions } from '../store/store-rgb-positions'
 
 export function ColorPaletteSlot({
     index,
@@ -27,10 +30,7 @@ export function ColorPaletteSlot({
             }}
             {...rest}
         >
-            <PlusIcon
-                // @ts-ignore
-                color={tailwindConfig.theme.extend.colors.foreground}
-            />
+            <PlusIcon color={tailwindConfig.theme.extend.colors.foreground} />
         </motion.button>
     )
 }

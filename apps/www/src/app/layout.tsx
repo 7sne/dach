@@ -1,8 +1,10 @@
 import './globals.css'
 
+import { GeistMono, GeistSans } from 'geist/font'
 import type { Metadata } from 'next'
-import { GeistSans, GeistMono } from 'geist/font'
 import { ReactNode } from 'react'
+
+import { NavigationBar } from '../components/navigation-bar'
 import { Providers } from './providers'
 
 export const metadata: Metadata = {
@@ -17,7 +19,10 @@ export default function RootLayout({ children }: { children: ReactNode }) {
             className={`${GeistSans.variable} ${GeistMono.variable}`}
         >
             <body>
-                <Providers>{children}</Providers>
+                <Providers>
+                    <NavigationBar />
+                    {children}
+                </Providers>
             </body>
         </html>
     )

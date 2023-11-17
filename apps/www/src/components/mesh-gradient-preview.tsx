@@ -1,6 +1,8 @@
-import React, { TouchEventHandler } from 'react'
-import debounce from 'lodash.debounce'
+'use client'
+
 import { motion, useAnimate, useMotionValue } from 'framer-motion'
+import debounce from 'lodash.debounce'
+import React, { TouchEventHandler } from 'react'
 import {
     MouseEventHandler,
     useCallback,
@@ -8,22 +10,23 @@ import {
     useRef,
     useState,
 } from 'react'
-import { BannerResizeHandle } from './banner-resize-handle'
-import { hexCodesToRgb } from '../lib/hex-codes-to-rgb'
+
+import { controlBoxWithAdaptiveColor } from '../lib/control-box-with-adaptive-color'
+import { downscaleFactor } from '../lib/downscale-factor'
 import { gradientImageData } from '../lib/gradient-image-data'
+import { hexCodesToRgb } from '../lib/hex-codes-to-rgb'
 import {
     CANVAS_DEFAULT_SIZE_X,
     CANVAS_DEFAULT_SIZE_Y,
 } from '../lib/mesh-gradient-canvas-const'
 import { useColors } from '../store/store-colors'
+import { useRgbPositions } from '../store/store-rgb-positions'
+import { useSize } from '../store/store-sizing'
+import { useText } from '../store/store-text'
 import { BannerEditModeTabs } from './banner-edit-mode-tabs'
 import { BannerRatioTabs } from './banner-ratio-tabs'
+import { BannerResizeHandle } from './banner-resize-handle'
 import { EditableText } from './editable-text'
-import { useRgbPositions } from '../store/store-rgb-positions'
-import { useText } from '../store/store-text'
-import { useSize } from '../store/store-sizing'
-import { controlBoxWithAdaptiveColor } from '../lib/control-box-with-adaptive-color'
-import { downscaleFactor } from '../lib/downscale-factor'
 
 const modeTabs = [
     { id: 'text', label: 'Text' },
@@ -99,7 +102,7 @@ export function MeshGradientPreview(): React.ReactElement {
     useEffect(() => {
         if (canvasElement.current && !canvasLoaded) {
             setCanvasLoaded(true)
-            animate(
+            void animate(
                 scope.current,
                 { opacity: 1, scale: 1 },
                 { duration: 0.4, bounce: 0.4, type: 'spring' },
@@ -109,7 +112,7 @@ export function MeshGradientPreview(): React.ReactElement {
     }, [positions, editMode, animate, scope, redraw, canvasLoaded])
 
     useEffect(() => {
-        if (canvasElement?.current) {
+        if (canvasElement.current) {
             const w = mWidth.get()
             const h = mHeight.get()
 
@@ -122,7 +125,7 @@ export function MeshGradientPreview(): React.ReactElement {
 
     const handleMouseDown = useCallback(
         (e: React.MouseEvent, index: number) => {
-            if (!canvasElement?.current) return
+            if (!canvasElement.current) return
 
             e.preventDefault()
             e.stopPropagation()
@@ -130,15 +133,19 @@ export function MeshGradientPreview(): React.ReactElement {
             draggingIndexRef.current = index
 
             const boundClientRect =
-                canvasElement.current?.getBoundingClientRect()
+                canvasElement.current.getBoundingClientRect()
 
-            const offsetX = boundClientRect?.left ?? 0
-            const offsetY = boundClientRect?.top ?? 0
+            // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
+            const offsetX = boundClientRect.left ?? 0
+            // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
+            const offsetY = boundClientRect.top ?? 0
 
             const clientX =
-                (e as unknown as TouchEvent).touches?.[0]?.clientX ?? e.clientX
+                // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
+                (e as unknown as TouchEvent).touches[0].clientX ?? e.clientX
             const clientY =
-                (e as unknown as TouchEvent).touches?.[0]?.clientY ?? e.clientY
+                // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
+                (e as unknown as TouchEvent).touches[0].clientY ?? e.clientY
 
             const mx = (clientX - offsetX) / canvasElement.current.width
             const my = (clientY - offsetY) / canvasElement.current.height
@@ -167,10 +174,13 @@ export function MeshGradientPreview(): React.ReactElement {
 
     const handleMouseMove = useCallback(
         (e: React.MouseEvent) => {
-            if (draggingIndexRef.current !== null && canvasElement?.current) {
+            if (draggingIndexRef.current !== null && canvasElement.current) {
                 const updatedPositions = [...positions]
 
-                const touch = (e as unknown as TouchEvent).touches?.[0]
+                const touch = (e as unknown as TouchEvent).touches[0] as
+                    | Touch
+                    | undefined
+
                 if (touch) {
                     const rect = canvasElement.current.getBoundingClientRect()
                     const offsetX = touch.clientX - rect.left
@@ -240,7 +250,7 @@ export function MeshGradientPreview(): React.ReactElement {
         writeRatio(ratio)
 
         const set = () => {
-            if (!canvasElement?.current) return
+            if (!canvasElement.current) return
             canvasElement.current.width = mWidth.get()
             canvasElement.current.height = mHeight.get()
             redraw(canvasElement.current)

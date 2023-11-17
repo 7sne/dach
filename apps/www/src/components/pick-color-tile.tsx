@@ -1,9 +1,12 @@
+'use client'
+
 import { motion } from 'framer-motion'
-import { ColorPicker } from './color-picker'
 import React, { useState } from 'react'
+
 import { hexToHsva } from '../lib/hex-to-hsva'
 import { hexToRgba } from '../lib/hex-to-rgba'
 import { cn } from '../lib/utils'
+import { ColorPicker } from './color-picker'
 
 export function PickColorTile({
     color,

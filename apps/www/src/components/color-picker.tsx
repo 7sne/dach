@@ -1,10 +1,12 @@
-import { useOnClickOutside } from '../hooks/use-on-click-outside'
+import './styles/react-color-picker.css'
+
 import { Dispatch, ReactElement, SetStateAction, useRef, useState } from 'react'
 import {
     ColorPicker as ReactColorPicker,
     IColor as Color,
 } from 'react-color-palette'
-import './styles/react-color-picker.css'
+
+import { useOnClickOutside } from '../hooks/use-on-click-outside'
 
 export function ColorPicker({
     color,
