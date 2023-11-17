@@ -13,7 +13,9 @@ describe('Generate banner', () => {
     afterAll(async () => fs.rmdir(sandboxDirectoryPath, { recursive: true }))
 
     test('should generate banner with default configuration.', async () => {
-        await execaCommand(`pnpm dev generate --output ${sandboxDirectoryPath}`)
+        await execaCommand(
+            `node dist/cjs generate --output ${sandboxDirectoryPath}`,
+        )
         expect(
             visualRegression(
                 fssync.readFileSync(
@@ -106,7 +108,7 @@ describe('Generate themed banner.', () => {
     beforeAll(async () => fs.mkdir(sandboxDirectoryPath))
     afterAll(async () => fs.rmdir(sandboxDirectoryPath, { recursive: true }))
 
-    test('should generate banner using default themes.', async () => {
+    test('should generate banner using predefined theme.', async () => {
         await execa('node', [
             'dist/cli.cjs',
             'generate',
