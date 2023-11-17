@@ -9,14 +9,14 @@
 
 ### Features
 
-- Generate banners using a wide variety of predefined themes.
-- Create and add new themes via the [web toolkit](https://www.dach.kukielka.xyz).
-- And much incoming!
+-   Generate banners using a wide variety of predefined themes.
+-   Create and add new themes via the [web toolkit](https://www.dach.kukielka.xyz).
+-   And much incoming!
 
 ### Description
 
 Dach is a command-line tool that you most probably will use only once per project.
-Its power comes from the fact that you can create themes with  for it and then use them for your personal projects or organization's projects, and so on. Currently, the amount of customization is limited and opinionated, but it will most probably slightly
+Its power comes from the fact that you can create themes with for it and then use them for your personal projects or organization's projects, and so on. Currently, the amount of customization is limited and opinionated, but it will most probably slightly
 change in the future as the project evolves.
 
 Dach is a command-line tool that you will most likely use only once per project. Its strength lies in the ability to create themes for it using the [web toolkit](https://dach.kukielka.xyz). You can then apply these themes to your personal or organizational projects. Currently, customization options are somewhat limited and opinionated, but they will likely undergo slight changes in the future as the project evolves.
@@ -152,17 +152,36 @@ Generates a banner using provided arguments.
 
 ## Example banners
 
+### Blaze
+
 ![Blaze](.github/example-banners/blaze.png)
+
+### Pearl
+
+![Pearl](.github/example-banners/pearl.png)
+
+### Elegant
+
+![Elegant](.github/example-banners/elegant.png)
+
+### Peach
+
+![Peach](.github/example-banners/peach.png)
+
+### Flora
 
 ![Flora](.github/example-banners/flora.png)
 
-![Funk](.github/example-banners/funk.png)
+### Lotus
+
+![Lotus](.github/example-banners/lotus.png)
 
 ## Installation
 
 Install dependencies.
+
 ```bash
-  pnpm install
+  npm i -g dach
 ```
 
 ## Contributing

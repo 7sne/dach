@@ -37,7 +37,7 @@
         "dev": "cross-env esno src/cli.ts",
         "build": "pnpm unbuild",
         "release": "npm publish",
-        "test": "vitest run --coverage",
+        "test": "pnpm build && vitest run --coverage",
         "stub": "pnpm unbuild --stub",
         "lint": "eslint --ext .ts,.js .",
         "lint:fix": "eslint --fix --ext .ts,.js .",
