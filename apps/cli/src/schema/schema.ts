@@ -2,10 +2,17 @@ import { z } from 'zod'
 
 export const themeSchema = z.union([
     z.literal('flora'),
-    z.literal('orange'),
+    z.literal('gold'),
     z.literal('blaze'),
     z.literal('funk'),
     z.literal('elegant'),
+    z.literal('lotus'),
+    z.literal('sunny'),
+    z.literal('night'),
+    z.literal('pearl'),
+    z.literal('pastel'),
+    z.literal('steel'),
+    z.literal('peach'),
 ])
 
 export type Theme = z.infer<typeof themeSchema>
