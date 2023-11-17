@@ -14,7 +14,7 @@ describe('Generate banner', () => {
 
     test('should generate banner with default configuration.', async () => {
         await execaCommand(
-            `node dist/cjs generate --output ${sandboxDirectoryPath}`,
+            `node ./dist/cli.cjs generate --output ${sandboxDirectoryPath}`,
         )
         expect(
             visualRegression(
