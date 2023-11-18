@@ -17,6 +17,7 @@
         "./src/**/*.ts",
         "./test/**/*.ts",
         "./.eslintrc.cjs",
-        "./build.config.js"
+        "./build.config.js",
+        "./vitest.config.ts"
     ]
 }
