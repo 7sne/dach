@@ -302,9 +302,6 @@ importers:
       typestrict:
         specifier: ^1.0.2
         version: 1.0.2(tslint@5.20.1)(typescript@5.2.2)
-      vitest:
-        specifier: ^0.34.4
-        version: 0.34.6(jsdom@22.1.0)
 
 packages:
 
