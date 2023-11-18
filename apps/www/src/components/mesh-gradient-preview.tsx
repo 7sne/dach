@@ -142,10 +142,10 @@ export function MeshGradientPreview(): React.ReactElement {
 
             const clientX =
                 // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
-                (e as unknown as TouchEvent).touches[0].clientX ?? e.clientX
+                (e as unknown as TouchEvent).touches?.[0]?.clientX ?? e.clientX
             const clientY =
                 // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
-                (e as unknown as TouchEvent).touches[0].clientY ?? e.clientY
+                (e as unknown as TouchEvent).touches?.[0]?.clientY ?? e.clientY
 
             const mx = (clientX - offsetX) / canvasElement.current.width
             const my = (clientY - offsetY) / canvasElement.current.height
@@ -177,7 +177,8 @@ export function MeshGradientPreview(): React.ReactElement {
             if (draggingIndexRef.current !== null && canvasElement.current) {
                 const updatedPositions = [...positions]
 
-                const touch = (e as unknown as TouchEvent).touches[0] as
+                // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
+                const touch = (e as unknown as TouchEvent).touches?.[0] as
                     | Touch
                     | undefined
 

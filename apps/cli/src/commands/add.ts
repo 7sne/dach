@@ -37,7 +37,8 @@ export function handleAddCmd(themeName: any, options: Record<string, any>) {
 
     themeStore.set('dach-themes', {
         themes: [
-            ...(themeStore.get('dach-themes').themes ?? []),
+            // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
+            ...(themeStore.get('dach-themes')?.themes ?? []),
             parsedOptionsResult.data,
         ],
     })
