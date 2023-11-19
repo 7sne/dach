@@ -1,17 +1,32 @@
-// @ts-check
 module.exports = {
-    extends: ['@antfu'],
+    root: true,
+    parser: '@typescript-eslint/parser',
+    plugins: ['no-only-tests', 'simple-import-sort', 'unused-imports'],
+    extends: 'typestrict',
+    parserOptions: {
+        ecmaVersion: 'latest',
+        sourceType: 'module',
+        project: 'tsconfig.json',
+        tsconfigRootDir: __dirname,
+    },
     rules: {
         indent: 'off',
-        'arrow-parens': ['error', 'as-needed'],
-        'quote-props': ['error', 'as-needed'],
-        '@typescript-eslint/indent': 'off',
-        '@typescript-eslint/brace-style': 'off',
-        '@typescript-eslint/no-redeclare': 'off',
-        '@typescript-eslint/consistent-type-definitions': ['error', 'type'],
+        'no-unused-vars': 'off',
+        'no-only-tests/no-only-tests': 'error',
+        '@typescript-eslint/no-floating-promises': 'warn',
         '@typescript-eslint/no-use-before-define': 'off',
-        'global-require': 0,
-        'antfu/if-newline': 'off',
-        'unicorn/number-literal-case': 'off',
+        'simple-import-sort/imports': 'error',
+        'simple-import-sort/exports': 'error',
+        'unused-imports/no-unused-imports': 'error',
+        'unused-imports/no-unused-vars': [
+            'warn',
+            {
+                vars: 'all',
+                varsIgnorePattern: '^_',
+                args: 'after-used',
+                argsIgnorePattern: '^_',
+            },
+        ],
     },
+    ignorePatterns: ['**/*.d.ts', '**/dist/**', '**/node_modules/**'],
 }

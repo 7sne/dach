@@ -1,5 +1,6 @@
-import path from 'node:path'
 import fs from 'node:fs'
+import path from 'node:path'
+
 import type canvas from 'canvas'
 
 export function writeCanvasToPngFile(

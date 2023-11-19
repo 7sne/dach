@@ -1,4 +1,7 @@
+'use client'
+
 import { ReactElement } from 'react'
+
 import { MAX_COLORS_IN_PALETTE } from '../lib/color-palette-const'
 import { useColors } from '../store/store-colors'
 import { ColorPaletteSlot } from './color-palette-slot'

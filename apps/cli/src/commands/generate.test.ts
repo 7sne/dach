@@ -1,4 +1,5 @@
 import { afterAll, describe, expect, test, vi } from 'vitest'
+
 import { logger } from '../logger'
 import { handleGenerateCmd } from './generate'
 
@@ -6,21 +7,26 @@ vi.mock('../write-canvas-to-png', () => ({
     writeCanvasToPngFile: vi.fn(),
 }))
 
+vi.stubEnv('NODE_ENV', 'testing')
+
 describe(handleGenerateCmd.name, () => {
     afterAll(() => {
         vi.clearAllMocks()
     })
 
     test('should generate banner with default options.', () => {
+        const loggerSpy = vi.spyOn(logger, 'printErrors')
+
         handleGenerateCmd({
-            output: './test/sandbox',
-            title: 'Title test',
-            description: 'Description test',
-            dimensions: '3000x1685',
+            output: 'test/sandbox',
+            title: 'Title',
+            description: 'Description',
             ratio: '16:9',
             theme: 'elegant',
             roundedCorners: false,
         })
+
+        expect(loggerSpy).toHaveBeenCalledTimes(0)
     })
 
     test('should print error on wrong `title` or `description` length.', () => {
@@ -70,14 +76,14 @@ describe(handleGenerateCmd.name, () => {
         expect(loggerSpy).toHaveBeenCalledTimes(1)
     })
 
-    test('work if `ratio` is defined.', () => {
+    test('works if ratio is provided.', () => {
         const loggerSpy = vi.spyOn(logger, 'printErrors')
 
         handleGenerateCmd({
             output: 'test/sandbox',
             title: 'Title test',
             description: 'Description test',
-            ratio: '16:9',
+            ratio: '21:9',
             theme: 'elegant',
             roundedCorners: false,
         })

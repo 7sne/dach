@@ -1,12 +1,15 @@
-import { MotionProps, motion } from 'framer-motion'
+'use client'
+
+import { motion, MotionProps } from 'framer-motion'
 import { ChevronsLeftRight } from 'lucide-react'
-import { cn } from '../lib/utils'
-import {
-    RESIZE_HANDLE_WIDTH_PX,
-    RESIZE_HANDLE_HEIGHT_PX,
-} from '../lib/mesh-gradient-canvas-const'
-import tailwindConfig from '../../tailwind.config'
 import { HTMLAttributes, ReactElement } from 'react'
+
+import tailwindConfig from '../../tailwind.config'
+import {
+    RESIZE_HANDLE_HEIGHT_PX,
+    RESIZE_HANDLE_WIDTH_PX,
+} from '../lib/mesh-gradient-canvas-const'
+import { cn } from '../lib/utils'
 
 export function BannerResizeHandle({
     orientation,
@@ -44,7 +47,6 @@ export function BannerResizeHandle({
                         ? `${RESIZE_HANDLE_HEIGHT_PX}px`
                         : '100%',
             }}
-            // @ts-ignore
             className={`${directionToCx[orientation]} items-center justify-center hidden sm:flex`}
             {...rest}
         >
@@ -56,7 +58,6 @@ export function BannerResizeHandle({
 
             <ChevronsLeftRight
                 color={
-                    // @ts-ignore
                     tailwindConfig.theme.extend.colors.secondary.foreground[50]
                 }
                 strokeWidth={0.8}

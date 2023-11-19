@@ -1,11 +1,13 @@
+'use client'
+
 import { ReactElement } from 'react'
+
 import { useColors } from '../store/store-colors'
 import { useRgbPositions } from '../store/store-rgb-positions'
 import { useText } from '../store/store-text'
-import { CopyToClipboard } from './copy-to-clipboard'
-import { GeneratedCliCommand } from './generated-cli-command'
+import { DachCommand } from './dach-command'
 
-export function AddThemeCliCommand(): ReactElement {
+export function AddThemeCommand(): ReactElement {
     const {
         colors,
         textColor: { title, description },
@@ -20,12 +22,8 @@ export function AddThemeCliCommand(): ReactElement {
     )}' --title-color "${title}" --description-color "${description}"`
 
     return (
-        <GeneratedCliCommand className="border border-t">
-            <GeneratedCliCommand.Text>
-                ▲ <span className="font-bold text-emerald-400">dach</span>{' '}
-                <span className="font-bold text-pink-400">add</span> {command}
-            </GeneratedCliCommand.Text>
-            <CopyToClipboard text={`dach add ${command}`} />
-        </GeneratedCliCommand>
+        <DachCommand program="dach" argument="add" options={command}>
+            {command}
+        </DachCommand>
     )
 }

@@ -1,4 +1,5 @@
 import { ReactElement, SVGProps } from 'react'
+
 import tailwindConfig from '../../../tailwind.config'
 
 export function AsteriskGlyph2(props: SVGProps<SVGSVGElement>): ReactElement {
@@ -14,8 +15,7 @@ export function AsteriskGlyph2(props: SVGProps<SVGSVGElement>): ReactElement {
             <path
                 d="M10 9.99999L246 246M10 246L246 10"
                 stroke-width="4"
-                // @ts-ignore
-                stroke={tailwindConfig.theme?.extend?.colors.border}
+                stroke={tailwindConfig.theme.extend.colors.border}
             />
         </svg>
     )

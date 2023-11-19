@@ -1,11 +1,11 @@
-import React, { useRef, useEffect } from 'react'
+import React, { useEffect, useRef } from 'react'
 
 export function EditableText({
     text,
     handleUpdateText,
     textProps,
     maxLength = 12,
-}: EditableTextProps): React.ReactElement {
+}: Props): React.ReactElement {
     const textarea = useRef<HTMLDivElement>(null)
 
     function handleChange(e: React.ChangeEvent<HTMLDivElement>): void {
@@ -42,7 +42,7 @@ export function EditableText({
     )
 }
 
-type EditableTextProps = {
+type Props = {
     text: string
     handleUpdateText: (title: string) => void
     maxLength?: number

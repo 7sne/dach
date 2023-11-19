@@ -1,16 +1,18 @@
 import * as path from 'node:path'
+import * as process from 'node:process'
+
 import * as canvas from 'canvas'
+import { gradientImageData, hexCodesToRgb } from 'dach-shared'
 import * as Yoga from 'yoga-layout-prebuilt'
 
-import { gradientImageData, hexCodesToRgb } from '@dach/shared'
+import { colorPresetToColors } from './presets/color-presets'
+import { positionPresetToPositions } from './presets/position-presets'
 import type {
     BackgroundConfig,
     BannerSettings,
     TextConfig,
 } from './schema/schema'
 import { themeSchema } from './schema/schema'
-import { colorPresetToColors } from './presets/color-presets'
-import { positionPresetToPositions } from './presets/position-presets'
 import { themeStore } from './theme-store'
 
 export function generateBanner({
@@ -60,7 +62,7 @@ export function generateBanner({
 
     // Draw title and description.
     // @todo - Handle these things better.
-    coreCanvasContext.fillStyle = text.titleColor ?? '#ffffff'
+    coreCanvasContext.fillStyle = text.titleColor
     coreCanvasContext.font = 'bold 296px "GeistBold"'
     coreCanvasContext.fillText(
         title,
@@ -68,7 +70,7 @@ export function generateBanner({
         titleNode.getComputedTop(),
     )
 
-    coreCanvasContext.fillStyle = text.descriptionColor ?? '#ffffff'
+    coreCanvasContext.fillStyle = text.descriptionColor
     coreCanvasContext.font = 'medium 100px "GeistMedium"'
     coreCanvasContext.fillText(
         description,
@@ -90,14 +92,6 @@ export function generateBanner({
 
 function convertThemeToTextConfig(theme: string): TextConfig {
     switch (theme) {
-        case 'funk':
-        case 'blaze':
-        case 'night':
-        case 'elegant':
-            return {
-                titleColor: '#f5f5f5',
-                descriptionColor: '#f5f5f5',
-            }
         case 'flora':
         case 'lotus':
         case 'pearl':
@@ -111,6 +105,10 @@ function convertThemeToTextConfig(theme: string): TextConfig {
                 titleColor: '#050505',
                 descriptionColor: '#050505',
             }
+        case 'funk':
+        case 'blaze':
+        case 'night':
+        case 'elegant':
         default:
             return {
                 titleColor: '#f5f5f5',
@@ -242,7 +240,7 @@ function createBackgroundFromUserTheme(
 
     const customThemeConfig = themeStore
         .get('dach-themes')
-        .themes.find((t: { name: string }) => t.name === theme)
+        .themes?.find(({ name }) => name === theme)
 
     if (!customThemeConfig) return new Error(`Theme ${theme} not found.`)
 
@@ -279,7 +277,7 @@ function createBackgroundFromTheme(
             colors,
             positions,
         })
-    } else if (type === 'plain') {
+    } else {
         makeBackgroundPlainColor(
             coreCanvasContext,
             dimensions,
@@ -332,14 +330,28 @@ function makeBackgroundPlainColor(
 
 function registerFonts(): Error | void {
     try {
-        canvas.registerFont(path.join(process.cwd(), 'assets', 'Geist.ttf'), {
-            family: 'GeistBold',
-            weight: 'bold',
-        })
-        canvas.registerFont(path.join(process.cwd(), 'assets', 'Geist.ttf'), {
-            family: 'GeistMedium',
-            weight: 'medium',
-        })
+        canvas.registerFont(
+            path.join(
+                process.env.NODE_ENV === 'testing' ? process.cwd() : __dirname,
+                'assets',
+                'Geist.ttf',
+            ),
+            {
+                family: 'GeistBold',
+                weight: 'bold',
+            },
+        )
+        canvas.registerFont(
+            path.join(
+                process.env.NODE_ENV === 'testing' ? process.cwd() : __dirname,
+                'assets',
+                'Geist.ttf',
+            ),
+            {
+                family: 'GeistMedium',
+                weight: 'medium',
+            },
+        )
     } catch (e) {
         return e as Error
     }

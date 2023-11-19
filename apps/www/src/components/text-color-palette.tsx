@@ -1,4 +1,7 @@
+'use client'
+
 import React from 'react'
+
 import { useColors } from '../store/store-colors'
 import { PickColorTile } from './pick-color-tile'
 

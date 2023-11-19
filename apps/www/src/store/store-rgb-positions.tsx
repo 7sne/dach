@@ -1,4 +1,5 @@
 import { create } from 'zustand'
+
 import { DEFAULT_RGB_POSITONS } from '../lib/mesh-gradient-canvas-const'
 
 export const useRgbPositions = create<Store>(set => ({

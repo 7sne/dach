@@ -1,13 +1,16 @@
 import './globals.css'
 
+import { GeistMono, GeistSans } from 'geist/font'
 import type { Metadata } from 'next'
-import { GeistSans, GeistMono } from 'geist/font'
 import { ReactNode } from 'react'
+
+import { NavigationBar } from '../components/navigation-bar'
 import { Providers } from './providers'
 
 export const metadata: Metadata = {
     title: 'Dach',
-    description: 'To be added :)',
+    description:
+        "Democratizing the creation of elegant banners for everyone's project.",
 }
 
 export default function RootLayout({ children }: { children: ReactNode }) {
@@ -17,7 +20,10 @@ export default function RootLayout({ children }: { children: ReactNode }) {
             className={`${GeistSans.variable} ${GeistMono.variable}`}
         >
             <body>
-                <Providers>{children}</Providers>
+                <Providers>
+                    <NavigationBar />
+                    {children}
+                </Providers>
             </body>
         </html>
     )
