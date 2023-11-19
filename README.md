@@ -39,6 +39,7 @@ dach generate  \
   --title "Funk" \
   --description "Example description" \
   --rounded-corners
+  --output "."
 ```
 
 #### Banner with custom output directory:
@@ -48,7 +49,7 @@ dach generate    \
   --theme elegant \
   --title "Output" \
   --description "Custom output directory" \
-  --output "./banners"
+  --output "./my-dir"
 ```
 
 #### Banner with custom dimensions:
@@ -59,6 +60,7 @@ dach generate \
   --title "Hello" \
   --description "Worlds" \
   --dimensions "1920x1200"
+  --output "."
 ```
 
 ## Commands
