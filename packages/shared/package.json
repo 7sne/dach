@@ -1,5 +1,5 @@
 {
-    "name": "@dach/shared",
+    "name": "dach-shared",
     "version": "0.0.1",
     "description": "Shared features between `@dach/www` and `@dach/cli`.",
     "author": "Maciej Kukielka <matthiaskukielka@gmail.com>",

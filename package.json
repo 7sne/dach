@@ -10,9 +10,7 @@
         "test": "turbo run test",
         "test:e2e": "turbo run test:e2e",
         "clean": "turbo run clean",
-        "format": "turbo run format",
-        "publish": "turbo build --filter=shared && turbo build --filter=cli && cd packages/cli && npm publish && cd ../../",
-        "release": "cd apps/cli && changelogen --release && git push --follow-tags && npm publish"
+        "format": "turbo run format"
     },
     "dependencies": {
         "eslint": "^8.53.0",

@@ -1,5 +1,5 @@
-import { ratioToDimensions } from '@dach/shared'
 import { Command } from 'commander'
+import { ratioToDimensions } from 'dach-shared'
 
 import { generateBanner } from '../generate-banner'
 import { logger } from '../logger'
@@ -51,8 +51,14 @@ export function handleGenerateCmd(options: Record<string, any>) {
 
     let dimensions = inSchemaParseResult.data.dimensions
     const ratio = inSchemaParseResult.data.ratio
+    console.log(dimensions)
 
-    if (ratio) {
+    if (!dimensions && !ratio) {
+        logger.printErrors('Dimensions or ratio must be provided.')
+        return
+    }
+
+    if (ratio && !dimensions) {
         const ratioToDimensionsResult = ratioToDimensions(ratio)
 
         if (ratioToDimensionsResult instanceof Error) {
@@ -63,11 +69,6 @@ export function handleGenerateCmd(options: Record<string, any>) {
         }
     }
 
-    if (!dimensions && !ratio) {
-        logger.printErrors('Dimensions or ratio must be provided.')
-        return
-    }
-
     const generateBannerResult = generateBanner({
         ...inSchemaParseResult.data,
         theme: inSchemaParseResult.data.theme,
@@ -75,8 +76,8 @@ export function handleGenerateCmd(options: Record<string, any>) {
     })
 
     if (generateBannerResult instanceof Error) {
-        console.error(generateBannerResult.message)
-        process.exit(1)
+        logger.printErrors(generateBannerResult.message)
+        return
     }
 
     const writeCanvasToPngFileResult = writeCanvasToPngFile(

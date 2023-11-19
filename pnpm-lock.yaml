@@ -23,9 +23,6 @@ importers:
       '@changesets/cli':
         specifier: ^2.26.2
         version: 2.26.2
-      '@dach/shared':
-        specifier: workspace:*
-        version: link:../../packages/shared
       canvas:
         specifier: ^2.10.2
         version: 2.11.2
@@ -38,6 +35,12 @@ importers:
       conf:
         specifier: ^10.1.2
         version: 10.1.2
+      dach-shared:
+        specifier: workspace:*
+        version: link:../../packages/shared
+      dotenv:
+        specifier: ^16.3.1
+        version: 16.3.1
       yoga-layout-prebuilt:
         specifier: ^1.10.0
         version: 1.10.0
@@ -117,9 +120,6 @@ importers:
 
   apps/www:
     dependencies:
-      '@dach/shared':
-        specifier: workspace:*
-        version: link:../../packages/shared
       '@radix-ui/react-dialog':
         specifier: ^1.0.5
         version: 1.0.5(@types/react-dom@18.0.0)(@types/react@18.0.0)(react-dom@18.0.0)(react@18.0.0)
@@ -135,6 +135,9 @@ importers:
       clsx:
         specifier: ^2.0.0
         version: 2.0.0
+      dach-shared:
+        specifier: workspace:*
+        version: link:../../packages/shared
       framer-motion:
         specifier: ^10.16.4
         version: 10.16.4(react-dom@18.0.0)(react@18.0.0)
@@ -4549,6 +4552,11 @@ packages:
     engines: {node: '>=10'}
     dependencies:
       is-obj: 2.0.0
+    dev: false
+
+  /dotenv@16.3.1:
+    resolution: {integrity: sha512-IPzF4w4/Rd94bA9imS68tZBaYyBWSCE47V1RGuMrB94iyTOIEwRmVL2x/4An+6mETpLrKJ5hQkB8W4kFAadeIQ==}
+    engines: {node: '>=12'}
     dev: false
 
   /ecc-jsbn@0.1.2:

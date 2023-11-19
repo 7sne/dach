@@ -26,7 +26,7 @@ export function BannerRatioTabs({
 }
 
 type Props = {
-    activeTab: string
     tabs: { id: string; label: string }[]
     handleUpdateActiveTab: (id: string) => void
+    activeTab: string | null
 }

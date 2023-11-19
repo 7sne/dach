@@ -1,5 +1,5 @@
 {
-    "name": "@dach/www",
+    "name": "www",
     "version": "1.0.0",
     "description": "Command line interface for Dach",
     "author": "Maciej Kukielka <matthiaskukielka@gmail.com>",
@@ -32,7 +32,7 @@
         "test:e2e": "pnpm start & wait-on http://localhost:3000 & cypress run --headed --browser chrome --spec 'cypress/e2e/**'"
     },
     "dependencies": {
-        "@dach/shared": "workspace:*",
+        "dach-shared": "workspace:*",
         "@radix-ui/react-dialog": "^1.0.5",
         "@radix-ui/react-dropdown-menu": "^2.0.6",
         "@radix-ui/react-slot": "^1.0.2",

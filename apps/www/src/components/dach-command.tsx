@@ -6,31 +6,34 @@ import { CopyContextProvider } from '../store/copy-context'
 import { Command } from './command'
 import { CopyToClipboard } from './copy-to-clipboard'
 
-export function DachCommand({ type, value, children }: Props): ReactElement {
+export function DachCommand({
+    program,
+    argument,
+    options,
+    children,
+}: Props): ReactElement {
+    const toCopy = `${program} ${argument} ${options}`
+
     return (
         <CopyContextProvider>
             {(copiedValue, copyToClipboard) => {
                 return (
                     <Command
                         className="mt-2 border border-t"
-                        onClick={() =>
-                            copyToClipboard(
-                                `dach generate --output "./.github" --title "Example" --description "Banner theme toolkit" --theme example`,
-                            )
-                        }
+                        onClick={() => copyToClipboard(toCopy)}
                     >
                         <Command.Text>
                             ▲{' '}
                             <span className="font-bold text-emerald-400">
-                                dach
+                                {program}
                             </span>{' '}
                             <span className="font-bold text-pink-400">
-                                {type}
+                                {argument}
                             </span>{' '}
                             {children}
                         </Command.Text>
                         <CopyToClipboard
-                            text={value}
+                            text={toCopy}
                             wasJustCopied={Boolean(copiedValue)}
                             copyToClipboard={copyToClipboard}
                         />
@@ -42,8 +45,9 @@ export function DachCommand({ type, value, children }: Props): ReactElement {
 }
 
 type Props = {
-    //                                 v-- Preserve type autocompletion.
-    type: 'add' | 'generate' | (string & {})
-    value: string
+    //                                     v-- Preserve type autocompletion.
+    argument: 'add' | 'generate' | (string & {})
+    program: 'dach' | (string & {})
+    options: string
     children: ReactNode
 }

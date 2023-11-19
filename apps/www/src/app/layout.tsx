@@ -9,7 +9,8 @@ import { Providers } from './providers'
 
 export const metadata: Metadata = {
     title: 'Dach',
-    description: 'To be added :)',
+    description:
+        "Democratizing the creation of elegant banners for everyone's project.",
 }
 
 export default function RootLayout({ children }: { children: ReactNode }) {

@@ -22,7 +22,7 @@ export function AddThemeCommand(): ReactElement {
     )}' --title-color "${title}" --description-color "${description}"`
 
     return (
-        <DachCommand type="generate" value={`dach generate ${command}`}>
+        <DachCommand program="dach" argument="add" options={command}>
             {command}
         </DachCommand>
     )

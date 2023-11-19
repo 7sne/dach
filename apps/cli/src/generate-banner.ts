@@ -1,7 +1,8 @@
 import * as path from 'node:path'
+import * as process from 'node:process'
 
-import { gradientImageData, hexCodesToRgb } from '@dach/shared'
 import * as canvas from 'canvas'
+import { gradientImageData, hexCodesToRgb } from 'dach-shared'
 import * as Yoga from 'yoga-layout-prebuilt'
 
 import { colorPresetToColors } from './presets/color-presets'
@@ -329,14 +330,28 @@ function makeBackgroundPlainColor(
 
 function registerFonts(): Error | void {
     try {
-        canvas.registerFont(path.join(process.cwd(), 'assets', 'Geist.ttf'), {
-            family: 'GeistBold',
-            weight: 'bold',
-        })
-        canvas.registerFont(path.join(process.cwd(), 'assets', 'Geist.ttf'), {
-            family: 'GeistMedium',
-            weight: 'medium',
-        })
+        canvas.registerFont(
+            path.join(
+                process.env.NODE_ENV === 'testing' ? process.cwd() : __dirname,
+                'assets',
+                'Geist.ttf',
+            ),
+            {
+                family: 'GeistBold',
+                weight: 'bold',
+            },
+        )
+        canvas.registerFont(
+            path.join(
+                process.env.NODE_ENV === 'testing' ? process.cwd() : __dirname,
+                'assets',
+                'Geist.ttf',
+            ),
+            {
+                family: 'GeistMedium',
+                weight: 'medium',
+            },
+        )
     } catch (e) {
         return e as Error
     }

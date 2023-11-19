@@ -51,10 +51,7 @@ export default async function Home(): Promise<React.ReactElement> {
             <section className="w-full mt-12">
                 <h3 className="text-xl">Installation</h3>
 
-                <DachCommand
-                    type="i"
-                    value={`dach add example --colors '["#fafafa"]' --positions '[{"x":0.49618420439786215,"y":0.22918175634846816}]' --title-color "#191919" --description-color "#191919"`}
-                >
+                <DachCommand program="npm" argument="install" options="-g dach">
                     -g dach
                 </DachCommand>
             </section>
@@ -79,8 +76,9 @@ export default async function Home(): Promise<React.ReactElement> {
                 <div className="mt-6">
                     <p>Generate banner using predefined theme:</p>
                     <DachCommand
-                        type="generate"
-                        value="dach generate -o . -t Title -d Description --theme funk"
+                        program="dach"
+                        argument="generate"
+                        options="-o . -t Title -d Description --theme funk"
                     >
                         -o . -t Title -d Description --theme funk
                     </DachCommand>
@@ -90,8 +88,9 @@ export default async function Home(): Promise<React.ReactElement> {
                     {' '}
                     <p>Add new theme:</p>
                     <DachCommand
-                        type="add"
-                        value={`dach add example --colors '["#fafafa"]' --positions '[{"x":0.49618420439786215,"y":0.22918175634846816}]' --title-color "#191919" --description-color "#191919"`}
+                        program="dach"
+                        argument="add"
+                        options={`example --colors '["#fafafa"]' --positions '[{"x":0.49618420439786215,"y":0.22918175634846816}]' --title-color "#191919" --description-color "#191919`}
                     >
                         example --colors &apos;[&quot;#fafafa&quot;]&apos;
                         --positions &apos;[
@@ -107,8 +106,9 @@ export default async function Home(): Promise<React.ReactElement> {
                     {' '}
                     <p>Generate banner using added theme:</p>
                     <DachCommand
-                        type="generate"
-                        value='dach generate --output "./.github" --title "Example" --description "Banner theme toolkit" --theme example'
+                        program="dach"
+                        argument="generate"
+                        options={`--output "./.github" --title "Example" --description "Banner theme toolkit" --theme example`}
                     >
                         --output &quot;./.github&quot; --title
                         &quot;Example&quot; --description &quot;Banner theme

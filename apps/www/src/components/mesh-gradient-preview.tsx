@@ -243,7 +243,7 @@ export function MeshGradientPreview(): React.ReactElement {
             writeRatio(null)
             writeSize(size)
         },
-        1_200,
+        200,
         { trailing: true },
     )
 
@@ -294,7 +294,7 @@ export function MeshGradientPreview(): React.ReactElement {
                 />
                 <BannerRatioTabs
                     tabs={ratioTabs}
-                    activeTab={ratio ?? '16:9'}
+                    activeTab={ratio}
                     handleUpdateActiveTab={updateRatio}
                 />
             </div>
@@ -310,7 +310,7 @@ export function MeshGradientPreview(): React.ReactElement {
             >
                 <div className="relative">
                     {editMode === 'text' && (
-                        <div className="absolute z-0 flex flex-col items-center justify-center w-full h-full overflow-hidden">
+                        <div className="absolute pb-6 z-0 flex flex-col items-center justify-center w-full h-full overflow-hidden">
                             <EditableText
                                 text={title}
                                 maxLength={20}
@@ -318,7 +318,7 @@ export function MeshGradientPreview(): React.ReactElement {
                                 textProps={{
                                     'data-cy': 'banner-title-text',
                                     className:
-                                        'title text-3xl sm:text-6xl leading-[2rem] sm:leading-[3.4rem] font-extrabold text-secondary whitespace-nowrap outline-black focus:outline-none',
+                                        'title text-3xl sm:text-6xl leading-[2rem] sm:leading-[3.8rem] font-bold text-secondary whitespace-nowrap outline-black focus:outline-none',
                                     style: {
                                         color: textColor.title,
                                     },

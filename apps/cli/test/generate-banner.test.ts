@@ -2,7 +2,7 @@ import * as fssync from 'node:fs'
 import * as fs from 'node:fs/promises'
 import path from 'node:path'
 
-import { visualRegression } from '@dach/shared'
+import { visualRegression } from 'dach-shared'
 import { execa, execaCommand } from 'execa'
 import { describe } from 'vitest'
 

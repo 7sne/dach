@@ -20,7 +20,7 @@ export function GenerateBannerCommand(): ReactElement {
         : `${command} --dimensions "${size!.width}x${size!.height}"`
 
     return (
-        <DachCommand type="generate" value={`dach add ${command}`}>
+        <DachCommand program="dach" argument="generate" options={command}>
             {command}
         </DachCommand>
     )
