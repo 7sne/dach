@@ -5,6 +5,12 @@
 > **Note**
 > This project is currently in its early stages of development, and there may be instances where it is either not functioning as intended or experiencing issues. Your feedback, as well as any identified issues or contributions, would be greatly appreciated in shaping its future progress. I still consider myself a beginner in software development, so I would greatly appreciate your understanding. ♥️
 
+## Installation
+
+```bash
+  npm i -g dach
+```
+
 ## Overview
 
 ### Features
@@ -175,14 +181,6 @@ Generates a banner using provided arguments.
 ### Lotus
 
 ![Lotus](.github/example-banners/lotus.png)
-
-## Installation
-
-Install dependencies.
-
-```bash
-  npm i -g dach
-```
 
 ## Contributing
 
