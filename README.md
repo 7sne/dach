@@ -38,7 +38,7 @@ dach generate  \
   --theme funk  \
   --title "Funk" \
   --description "Example description" \
-  --rounded-corners
+  --rounded-corners \
   --output "."
 ```
 
@@ -59,7 +59,7 @@ dach generate \
   --theme funk \
   --title "Hello" \
   --description "Worlds" \
-  --dimensions "1920x1200"
+  --dimensions "1920x1200" \
   --output "."
 ```
 
